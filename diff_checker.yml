@@ -1,0 +1,21 @@
+server:
+  - 'http://localhost:8000'
+  - 'http://localhost:8080'
+responce:
+  file_name_prefix: ''
+  file_name_postfix: .xml
+  post_process: disabled
+request:
+  - case-id: test1
+    header:
+      x-test-case-id: test1
+      x-test-case-debug-id: abcd-efgh-1234
+    parameter: ping=1
+  - case-id: test2
+    parameter: status=1
+  - case-id: test3
+    parameter: >-
+      looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong
+    header:
+      x-test-case-id: test3
+      x-test-case-debug-id: long-param-test
