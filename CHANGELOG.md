@@ -9,13 +9,25 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
-## [Unreleased]
-
-[Unreleased]: https://github.com/km45/responce-diff-checker/compare/v0.1.0...HEAD
+## Unreleased
 
 ---
 
-## 0.1.0 - 2018/01/16
+## [v0.2.0] - 2018/01/17
+
+### Added
+
+- Add post process mode xml
+
+### Fixed
+
+- Remove output directory only when target directory already exists
+
+[v0.2.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.2.0
+
+---
+
+## [v0.1.0] - 2018/01/16
 
 ### Added
 
@@ -26,3 +38,5 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 - Add license file `LICENCE`
 - Add document files `CHANGELOG.md` and `README.md`
 - Add `.gitignore`
+
+[v0.1.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.1.0
