@@ -132,13 +132,19 @@ def query(server_config: typing.List[str], request: dict, logger: logging.Logger
     return responces
 
 
-def clear_output_directory(directory: str) -> None:
+def clear_output_directory(directory: str, logger: logging.Logger) -> None:
     """Clear output directory
 
     Args:
         directory: directory to remove recursively
+        logger: logger instance
     """
+    logger.debug(
+        'remove directory "{}" recursively if exists'.format(directory))
+
     if os.path.exists(directory):
+        logger.debug('directory "{}" exists'.format(directory))
+        logger.warn('remove directory "{}" recursively'.format(directory))
         shutil.rmtree(directory)
 
 
@@ -208,7 +214,7 @@ def main():
 
     responces = query(config['server'], request, logger)
 
-    clear_output_directory(parameters['--out'])
+    clear_output_directory(parameters['--out'], logger)
 
     saved_file_paths = save_responces(
         responces, config['responce'], parameters['--out'], logger)
