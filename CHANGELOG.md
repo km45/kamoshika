@@ -27,7 +27,7 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
-## 0.1.0 - 2018/01/16
+## [v0.1.0] - 2018/01/16
 
 ### Added
 
@@ -38,3 +38,5 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 - Add license file `LICENCE`
 - Add document files `CHANGELOG.md` and `README.md`
 - Add `.gitignore`
+
+[v0.1.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.1.0
