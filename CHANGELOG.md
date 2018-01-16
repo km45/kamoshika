@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## [Unreleased]
 
+### Added
+
+- Add post process mode xml
+
 ### Fixed
 
 - Remove output directory only when target directory already exists
