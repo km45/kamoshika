@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove output directory only when target directory already exists
+
 [Unreleased]: https://github.com/km45/responce-diff-checker/compare/v0.1.0...HEAD
 
 ---
