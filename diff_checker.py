@@ -186,6 +186,16 @@ def save_responces(responces: typing.List[requests.Response],
     return saved_files
 
 
+def post_process(saved_file_paths: typing.List[str],
+                 responce_conf: dict,
+                 logger: logging.Logger) -> typing.List[str]:
+    # TODO: Implement post processes like followings:
+    #   - uncompress archive
+    #   - format text such as html/xml and json
+    #   - convert binary to text
+    return saved_file_paths
+
+
 def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.Logger) -> None:
     """invoke diff viewer
 
@@ -224,11 +234,8 @@ def main():
     saved_file_paths = save_responces(
         responces, config['responce'], parameters['--out'], logger)
 
-    # TODO: Implement post processes like followings:
-    #   - uncompress archive
-    #   - format text such as html/xml and json
-    #   - convert binary to text
-    post_processed_paths = saved_file_paths
+    post_processed_paths = post_process(
+        saved_file_paths, config['responce'], logger)
 
     invoke_diff_viewer(post_processed_paths, logger)
 
