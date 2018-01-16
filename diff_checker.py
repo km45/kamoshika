@@ -138,7 +138,8 @@ def clear_output_directory(directory: str) -> None:
     Args:
         directory: directory to remove recursively
     """
-    shutil.rmtree(directory)
+    if os.path.exists(directory):
+        shutil.rmtree(directory)
 
 
 def save_responces(responces: typing.List[requests.Response], responce_conf: dict, out_directory: str, logger: logging.Logger) -> typing.List[str]:
