@@ -220,8 +220,8 @@ def post_process_to_single_file(saved_file_path: str,
         # format xml
         command = ['xmllint', '--format', saved_file_path]
         logger.debug('execute following command:\n{}'.format(command))
-        p = subprocess.run(command, stdout=subprocess.PIPE)
-        formatted_xml = p.stdout.decode('UTF-8')
+        external_process = subprocess.run(command, stdout=subprocess.PIPE)
+        formatted_xml = external_process.stdout.decode('UTF-8')
         # save file
         processed_file_name = '{}{}f{}'.format(
             file_name_prefix, number, file_name_postfix)
