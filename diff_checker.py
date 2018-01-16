@@ -191,6 +191,18 @@ def post_process_to_single_file(saved_file_path: str,
                                 out_directory: str,
                                 number: int,
                                 logger: logging.Logger)-> str:
+    """Do post process to single file
+
+    Args:
+        saved_file_path: saved file path to process
+        responce_conf: responce field of config
+        out_directory: directory where save files
+        number: target file number
+        logger: logger instance
+
+    Returns:
+        processed file path
+    """
     # TODO: Implement post processes like followings:
     #   - uncompress archive
     #   - format text such as html and json
@@ -228,6 +240,17 @@ def post_process(saved_file_paths: typing.List[str],
                  responce_conf: dict,
                  out_directory: str,
                  logger: logging.Logger) -> typing.List[str]:
+    """Do post process for each files
+
+    Args:
+        saved_file_paths: saved file paths to process
+        responce_conf: responce field of config
+        out_directory: directory where save files
+        logger: logger instance
+
+    Returns:
+        processed file paths
+    """
     post_processed_paths = []  # type: typing.List[str]
     for index, path in enumerate(saved_file_paths):
         number = index + 1
