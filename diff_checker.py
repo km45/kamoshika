@@ -272,7 +272,7 @@ def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.L
     """
     command = ['meld'] + post_processed_paths
     logger.debug('execute following command:\n{}'.format(command))
-    subprocess.call(command)
+    subprocess.run(command)
 
 
 def main():
