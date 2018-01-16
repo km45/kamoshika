@@ -9,7 +9,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
-## [Unreleased]
+## Unreleased
+
+---
+
+## [v0.2.0] - 2018/01/17
 
 ### Added
 
@@ -19,7 +23,7 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 - Remove output directory only when target directory already exists
 
-[Unreleased]: https://github.com/km45/responce-diff-checker/compare/v0.1.0...HEAD
+[v0.2.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.2.0
 
 ---
 
