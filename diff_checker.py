@@ -94,7 +94,9 @@ def get_request(request_config: typing.List[dict], case_id: str, logger: logging
     return None
 
 
-def query(server_config: typing.List[str], request: dict, logger: logging.Logger) -> typing.List[requests.Response]:
+def query(server_config: typing.List[str],
+          request: dict,
+          logger: logging.Logger) -> typing.List[requests.Response]:
     """Send a request and receive a responce for each server
 
     Args:
@@ -148,7 +150,10 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
         shutil.rmtree(directory)
 
 
-def save_responces(responces: typing.List[requests.Response], responce_conf: dict, out_directory: str, logger: logging.Logger) -> typing.List[str]:
+def save_responces(responces: typing.List[requests.Response],
+                   responce_conf: dict,
+                   out_directory: str,
+                   logger: logging.Logger) -> typing.List[str]:
     """Save responces as files
 
     Args:
