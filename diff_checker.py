@@ -186,14 +186,58 @@ def save_responces(responces: typing.List[requests.Response],
     return saved_files
 
 
-def post_process(saved_file_paths: typing.List[str],
-                 responce_conf: dict,
-                 logger: logging.Logger) -> typing.List[str]:
+def post_process_to_single_file(saved_file_path: str,
+                                responce_conf: dict,
+                                out_directory: str,
+                                number: int,
+                                logger: logging.Logger)-> str:
     # TODO: Implement post processes like followings:
     #   - uncompress archive
-    #   - format text such as html/xml and json
+    #   - format text such as html and json
     #   - convert binary to text
-    return saved_file_paths
+    mode = responce_conf['post_process']
+    logger.debug('post process mode: {}'.format(mode))
+
+    file_name_prefix = responce_conf['file_name_prefix']
+    file_name_postfix = responce_conf['file_name_postfix']
+
+    if mode == 'disabled':
+        # nothing to do
+        return saved_file_path
+    elif mode == 'xml':
+        # format xml
+        command = ['xmllint', '--format', saved_file_path]
+        logger.debug('execute following command:\n{}'.format(command))
+        p = subprocess.run(command, stdout=subprocess.PIPE)
+        formatted_xml = p.stdout.decode('UTF-8')
+        # save file
+        processed_file_name = '{}{}f{}'.format(
+            file_name_prefix, number, file_name_postfix)
+        processed_file_path = os.path.join(out_directory, processed_file_name)
+        with open(processed_file_path, 'wt') as out:
+            logger.info('save formated xml as {}'.format(processed_file_path))
+            out.write(formatted_xml)
+        logger.info('success to save {}'.format(processed_file_path))
+        return processed_file_path
+    else:
+        # nothing to do
+        return saved_file_path
+
+
+def post_process(saved_file_paths: typing.List[str],
+                 responce_conf: dict,
+                 out_directory: str,
+                 logger: logging.Logger) -> typing.List[str]:
+    post_processed_paths = []  # type: typing.List[str]
+    for index, path in enumerate(saved_file_paths):
+        number = index + 1
+        logger.info(
+            'start post process {}/{}'.format(number, len(saved_file_paths)))
+        post_processed_paths.append(
+            post_process_to_single_file(path, responce_conf, out_directory, number, logger))
+        logger.info(
+            'end post process {}/{}'.format(number, len(saved_file_paths)))
+    return post_processed_paths
 
 
 def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.Logger) -> None:
@@ -235,7 +279,7 @@ def main():
         responces, config['responce'], parameters['--out'], logger)
 
     post_processed_paths = post_process(
-        saved_file_paths, config['responce'], logger)
+        saved_file_paths, config['responce'], parameters['--out'], logger)
 
     invoke_diff_viewer(post_processed_paths, logger)
 
