@@ -23,6 +23,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 - Remove a dependency for an external command xmllint
 
+[v0.2.1]: https://github.com/km45/responce-diff-checker/releases/tag/v0.2.1
+
 ---
 
 ## [v0.2.0] - 2018/01/17
