@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Changed
+
+- Remove a dependency for an external command xmllint
+
 ---
 
 ## [v0.2.0] - 2018/01/17
