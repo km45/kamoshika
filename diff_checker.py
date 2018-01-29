@@ -220,10 +220,10 @@ def post_process_to_single_file(saved_file_path: str,
     elif mode == 'xml':
         # format xml
         with open(saved_file_path) as saved_file:
-            readed_file = saved_file.read()
-            logger.debug('readed file:\n{}'.format(readed_file))
+            read_file = saved_file.read()
+            logger.debug('read file:\n{}'.format(read_file))
             formatted_xml = xml.dom.minidom.parseString(
-                readed_file).toprettyxml()
+                read_file).toprettyxml()
 
         # save file
         processed_file_name = '{}{}f{}'.format(
