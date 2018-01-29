@@ -13,6 +13,14 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
+## [v0.2.1] - 2018/01/29
+
+### Changed
+
+- Remove a dependency for an external command xmllint
+
+---
+
 ## [v0.2.0] - 2018/01/17
 
 ### Added

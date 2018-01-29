@@ -16,6 +16,7 @@ import os
 import shutil
 import subprocess
 import typing
+import xml.dom.minidom
 
 import docopt
 import requests
@@ -218,10 +219,12 @@ def post_process_to_single_file(saved_file_path: str,
         return saved_file_path
     elif mode == 'xml':
         # format xml
-        command = ['xmllint', '--format', saved_file_path]
-        logger.debug('execute following command:\n{}'.format(command))
-        external_process = subprocess.run(command, stdout=subprocess.PIPE)
-        formatted_xml = external_process.stdout.decode('UTF-8')
+        with open(saved_file_path) as saved_file:
+            readed_file = saved_file.read()
+            logger.debug('readed file:\n{}'.format(readed_file))
+            formatted_xml = xml.dom.minidom.parseString(
+                readed_file).toprettyxml()
+
         # save file
         processed_file_name = '{}{}f{}'.format(
             file_name_prefix, number, file_name_postfix)
