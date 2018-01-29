@@ -11,9 +11,15 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+---
+
+## [v0.3.0] - 2018/01/29
+
 ### Added
 
 - Support non UTF-8 file for post process xml
+
+[v0.3.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.3.0
 
 ---
 
