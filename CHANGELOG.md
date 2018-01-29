@@ -13,11 +13,23 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
+## [v0.3.0] - 2018/01/29
+
+### Added
+
+- Support non UTF-8 file for post process xml
+
+[v0.3.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.3.0
+
+---
+
 ## [v0.2.1] - 2018/01/29
 
 ### Changed
 
 - Remove a dependency for an external command xmllint
+
+[v0.2.1]: https://github.com/km45/responce-diff-checker/releases/tag/v0.2.1
 
 ---
 
