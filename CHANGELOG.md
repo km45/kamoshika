@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Added
+
+- Support non UTF-8 file for post process xml
+
 ---
 
 ## [v0.2.1] - 2018/01/29
