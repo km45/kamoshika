@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 """
 Usage:
-  diff_checker.py [-c <FILE>] [-o <DIRECTORY>] [-v | -vv | -vvv] <KEY>
+  diff_checker.py [-c <FILE>] [-o <DIRECTORY>] [--log-level <LEVEL>] <KEY>
   diff_checker.py -h | --help
 
 Options:
   -h --help             show this
   -c --config <FILE>    specify config file [default: diff_checker.yml]
   -o --out <DIRECTORY>  specify output directory [default: out]
-  -v                    show verbose message
+  --log-level <LEVEL>   specify log level [default: info]
+                        valid values:
+                          - fatal
+                          - error
+                          - warn
+                          - info
+                          - debug
 """
 
 import logging
@@ -293,12 +299,13 @@ def main():
     parameters = parse_options()
 
     log_level_map = {
-        0: logging.ERROR,
-        1: logging.WARN,
-        2: logging.INFO,
-        3: logging.DEBUG
+        "fatal": logging.FATAL,
+        "error": logging.ERROR,
+        "warn": logging.WARN,
+        "info": logging.INFO,
+        "debug": logging.DEBUG
     }
-    logger = create_logger(log_level_map[parameters['-v']])
+    logger = create_logger(log_level_map[parameters['--log-level']])
 
     logger.debug('parsed options:\n{}'.format(parameters))
 

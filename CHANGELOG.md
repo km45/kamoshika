@@ -13,6 +13,24 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
+## [v0.4.0] - 2018/03/01
+
+### Added
+
+- Add log level option `--log-level`
+
+### Changed
+
+- Change default log level from ERROR to INFO
+
+### Removed
+
+- Remove verbose options `-v` / `-vv` / `-vvv` (use `--log-level` instead of them)
+
+[v0.4.0]: https://github.com/km45/responce-diff-checker/releases/tag/v0.4.0
+
+---
+
 ## [v0.3.0] - 2018/01/29
 
 ### Added
