@@ -11,6 +11,18 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Added
+
+- Add log level option `--log-level`
+
+### Changed
+
+- Change default log level from ERROR to INFO
+
+### Removed
+
+- Remove verbose options `-v` / `-vv` / `-vvv` (use `--log-level` instead of them)
+
 ---
 
 ## [v0.3.0] - 2018/01/29
