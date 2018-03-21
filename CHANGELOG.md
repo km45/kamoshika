@@ -13,6 +13,17 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
+## [v0.5.0] - 2018/03/21
+
+### Changed
+
+- Change repository name
+- Change script name and default config file name
+
+[v0.5.0]: https://github.com/km45/kamoshika/releases/tag/v0.5.0
+
+---
+
 ## [v0.4.0] - 2018/03/01
 
 ### Added
