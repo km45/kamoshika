@@ -6,7 +6,7 @@ Usage:
 
 Options:
   -h --help             show this
-  -c --config <FILE>    specify config file [default: diff_checker.yml]
+  -c --config <FILE>    specify config file [default: kamoshika.yml]
   -o --out <DIRECTORY>  specify output directory [default: out]
   --log-level <LEVEL>   specify log level [default: info]
                         valid values:
