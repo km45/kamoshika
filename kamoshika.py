@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Usage:
-  diff_checker.py [-c <FILE>] [-o <DIRECTORY>] [--log-level <LEVEL>] <KEY>
-  diff_checker.py -h | --help
+  kamoshika.py [-c <FILE>] [-o <DIRECTORY>] [--log-level <LEVEL>] <KEY>
+  kamoshika.py -h | --help
 
 Options:
   -h --help             show this
