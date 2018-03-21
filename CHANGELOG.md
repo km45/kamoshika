@@ -11,6 +11,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Changed
+
+- Change repository name
+- Change script name and default config file name
+
 ---
 
 ## [v0.4.0] - 2018/03/01
