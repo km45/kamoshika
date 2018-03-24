@@ -76,6 +76,7 @@ def main():
 
     request = conf.get_request(parameters['<KEY>'], logger)
 
+    # TODO: Support other strategies
     strategy_instance = strategy.XmlStrategy(
         parameters['--out'], conf.get_server_list(), request, logger)
 
