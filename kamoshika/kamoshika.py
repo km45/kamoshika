@@ -239,7 +239,7 @@ def main():
     """
     parameters = parse_options()
 
-    logger = log.create_logger(log.LOG_LEVEL_MAP[parameters['--log-level']])
+    logger = log.create_logger(parameters['--log-level'])
 
     logger.debug('parsed options:\n{}'.format(parameters))
 

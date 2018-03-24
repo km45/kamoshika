@@ -12,11 +12,11 @@ LOG_LEVEL_MAP = {
 }
 
 
-def create_logger(log_level: int) -> logging.Logger:
+def create_logger(log_level: str) -> logging.Logger:
     """Create logger instance
 
     Args:
-        log_level: log level integer value [0, 100]
+        log_level: log level specifier string
 
     Returns:
         logger instance
@@ -25,11 +25,11 @@ def create_logger(log_level: int) -> logging.Logger:
         '[%(asctime)s] [%(levelname)s] (%(filename)s:%(lineno)d) %(message)s')
 
     handler = logging.StreamHandler()
-    handler.setLevel(log_level)
+    handler.setLevel(LOG_LEVEL_MAP[log_level])
     handler.setFormatter(logging.Formatter(log_format))
 
     logger = logging.getLogger(__name__)
-    logger.setLevel(log_level)
+    logger.setLevel(LOG_LEVEL_MAP[log_level])
     logger.addHandler(handler)
 
     return logger
