@@ -9,7 +9,7 @@ class Config:
         self._content = self.__load(file_path, logger)
 
     @property
-    def content(self):
+    def content(self) -> dict:
         return self._content
 
     def __load(self, file_path: str, logger: logging.Logger) -> dict:
