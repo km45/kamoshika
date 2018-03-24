@@ -11,10 +11,16 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+---
+
+## [v0.7.0] - 2018/03/25
+
 ### Changed
 
 - Divide `kamoshika.py` into several files
 - Remove `responce` (typo of "response") field from `sample.yml` because change `kamoshika.py` behavior not to refer the field
+
+[v0.7.0]: https://github.com/km45/kamoshika/releases/tag/v0.7.0
 
 ---
 
