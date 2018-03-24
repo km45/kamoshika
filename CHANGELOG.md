@@ -11,9 +11,15 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+---
+
+## [v0.6.0] - 2018/03/24
+
 ### Changed
 
 - Change directory layout
+
+[v0.6.0]: https://github.com/km45/kamoshika/releases/tag/v0.6.0
 
 ---
 
