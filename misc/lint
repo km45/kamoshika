@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function lint_config() {
+  yamllint sample.yml
+}
+
+function lint_scripts() {
+  files=$(find -type f | grep py$ | grep -v misc)
+
+  pylint ${files}
+  mypy --ignore-missing-imports ${files}
+}
+
+function main() {
+  lint_config
+  lint_scripts
+}
+
+main "$@"
