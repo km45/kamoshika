@@ -27,6 +27,16 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
 
 
 def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
+    """format xml
+
+    Args:
+        input_file_path: input xml file path to format
+        input_file_encoding: encoding of input xml file
+        logger: logger instance
+
+    Returns:
+        formatted xml
+    """
     with open(input_file_path, encoding=input_file_encoding) as input_file:
         read_file = input_file.read()
         logger.debug('read file ({}):\n{}\n'.format(
