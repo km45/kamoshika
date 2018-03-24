@@ -64,27 +64,6 @@ def parse_options() -> dict:
     return parameters
 
 
-def get_request(request_config: typing.List[dict], case_id: str, logger: logging.Logger) -> dict:
-    """Search request for target case id
-
-    Args:
-        requests: request field of config
-        case_id: target case id
-        logger: logger instance
-
-    Returns:
-        target request if found, otherwise None
-    """
-    for request in request_config:
-        if request['case-id'] == case_id:
-            logger.debug(
-                'success to find request\n{}'.format(
-                    yaml.dump(request, default_flow_style=False)))
-            return request
-    logger.error('failed to find request (case-id = {})'.format(case_id))
-    return None
-
-
 def query(server_config: typing.List[str],
           request: dict,
           logger: logging.Logger) -> typing.List[requests.Response]:
@@ -295,7 +274,7 @@ def main():
 
     loaded_config = config.load_config(parameters['--config'], logger)
 
-    request = get_request(
+    request = config.get_request(
         loaded_config['request'], parameters['<KEY>'], logger)
 
     responces = query(loaded_config['server'], request, logger)
