@@ -229,11 +229,3 @@ class XmlStrategy:
                 self.__post_process_to_single_file(path, number))
             self._logger.info(
                 'end post process {}/{}'.format(number, len(self._saved_file_paths)))
-
-    @property
-    def post_processed_paths(self) -> typing.List[str]:
-        """
-        Returns:
-            processed file paths
-        """
-        return self._post_processed_paths
