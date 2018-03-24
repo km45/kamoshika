@@ -149,13 +149,7 @@ def post_process_to_single_file(saved_file_path: str,
         # nothing to do
         return saved_file_path
     elif mode == 'xml':
-        # guess encoding
-        command = ['nkf', '--guess=1', saved_file_path]
-        logger.debug('execute following command:\n{}'.format(command))
-        external_process = subprocess.run(command, stdout=subprocess.PIPE)
-        saved_file_encoding = external_process.stdout.decode().rstrip('\n')
-        logger.debug('guessed encoding of file {}: {}'.format(
-            saved_file_path, saved_file_encoding))
+        saved_file_encoding = strategy.guess_encoding(saved_file_path, logger)
 
         # format xml
         with open(saved_file_path, encoding=saved_file_encoding) as saved_file:

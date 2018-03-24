@@ -25,6 +25,16 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
         shutil.rmtree(directory)
 
 
+def guess_encoding(file_path: str, logger: logging.Logger) -> str:
+    command = ['nkf', '--guess=1', file_path]
+    logger.debug('execute following command:\n{}'.format(command))
+    external_process = subprocess.run(command, stdout=subprocess.PIPE)
+    file_encoding = external_process.stdout.decode().rstrip('\n')
+    logger.debug('guessed encoding of file {}: {}'.format(
+        file_path, file_encoding))
+    return file_encoding
+
+
 def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.Logger) -> None:
     """invoke diff viewer
 
