@@ -4,22 +4,34 @@ import typing
 import yaml
 
 
+class Config:
+    def __init__(self, file_path: str, logger: logging.Logger) -> None:
+        self._content = self.__load(file_path, logger)
+
+    @property
+    def content(self):
+        return self._content
+
+    def __load(self, file_path: str, logger: logging.Logger) -> dict:
+        """Load config file
+
+        Args:
+            file_path: config file path
+            logger: logger instance
+
+        Returns:
+            content dictionary
+        """
+        with open(file_path) as yaml_file:
+            content = yaml.load(yaml_file)
+            logger.debug('loaded config ({}):\n{}'.format(
+                file_path,
+                yaml.dump(content, default_flow_style=False)))
+        return content
+
+
 def load_config(file_path: str, logger: logging.Logger) -> dict:
-    """Load config file
-
-    Args:
-        file_path: config file path
-        logger: logger instance
-
-    Returns:
-        content dictionary
-    """
-    with open(file_path) as yaml_file:
-        content = yaml.load(yaml_file)
-        logger.debug('loaded config ({}):\n{}'.format(
-            file_path,
-            yaml.dump(content, default_flow_style=False)))
-    return content
+    return Config(file_path, logger).content
 
 
 def get_request(request_config: typing.List[dict], case_id: str, logger: logging.Logger) -> dict:
