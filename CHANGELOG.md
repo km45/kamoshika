@@ -13,6 +13,16 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ---
 
+## [v0.6.0] - 2018/03/24
+
+### Changed
+
+- Change directory layout
+
+[v0.6.0]: https://github.com/km45/kamoshika/releases/tag/v0.6.0
+
+---
+
 ## [v0.5.0] - 2018/03/21
 
 ### Changed
