@@ -20,9 +20,7 @@ Options:
 
 import logging
 import os
-import subprocess
 import typing
-import xml.dom.minidom
 
 import docopt
 import requests
@@ -150,14 +148,8 @@ def post_process_to_single_file(saved_file_path: str,
         return saved_file_path
     elif mode == 'xml':
         saved_file_encoding = strategy.guess_encoding(saved_file_path, logger)
-
-        # format xml
-        with open(saved_file_path, encoding=saved_file_encoding) as saved_file:
-            read_file = saved_file.read()
-            logger.debug('read file ({}):\n{}\n'.format(
-                saved_file_path, read_file))
-            formatted_xml = xml.dom.minidom.parseString(
-                read_file).toprettyxml()
+        formatted_xml = strategy.format_xml(
+            saved_file_path, saved_file_encoding, logger)
 
         # save file
         processed_file_name = '{}{}f{}'.format(

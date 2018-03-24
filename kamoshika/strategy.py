@@ -7,6 +7,7 @@ import os
 import shutil
 import subprocess
 import typing
+import xml.dom.minidom
 
 
 def clear_output_directory(directory: str, logger: logging.Logger) -> None:
@@ -23,6 +24,14 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
         logger.debug('directory "{}" exists'.format(directory))
         logger.warn('remove directory "{}" recursively'.format(directory))
         shutil.rmtree(directory)
+
+
+def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
+    with open(input_file_path, encoding=input_file_encoding) as input_file:
+        read_file = input_file.read()
+        logger.debug('read file ({}):\n{}\n'.format(
+            input_file_path, read_file))
+        return xml.dom.minidom.parseString(read_file).toprettyxml()
 
 
 def guess_encoding(file_path: str, logger: logging.Logger) -> str:
