@@ -78,10 +78,9 @@ def main():
 
     strategy_instance = strategy.XmlStrategy(
         parameters['--out'], conf.get_server_list(), request, logger)
+
     strategy_instance.pre_query()
-
     strategy_instance.query()
-
     strategy_instance.post_query()
 
 
