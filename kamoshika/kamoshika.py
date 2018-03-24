@@ -107,12 +107,9 @@ def save_responces(responces: typing.List[requests.Response],
         file_name = '{}{}{}'.format(
             file_name_prefix, number, file_name_postfix)
         file_path = os.path.join(out_directory, file_name)
-        with open(file_path, 'wb') as out:
-            logger.info(
-                'save responce body for query {} as {}'.format(number, file_path))
-            out.write(responce.content)
-            logger.info('success to save {}'.format(file_path))
-            saved_files.append(file_path)
+        strategy.save_binary_as_file(
+            file_path, 'responce body for query {}'.format(number), responce.content, logger)
+        saved_files.append(file_path)
     return saved_files
 
 
