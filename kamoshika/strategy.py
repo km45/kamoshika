@@ -26,6 +26,15 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
 
 
 def guess_encoding(file_path: str, logger: logging.Logger) -> str:
+    """guess file encoding
+
+    Args:
+        file_path: file path to guess encoding
+        logger: logger instance
+
+    Returns:
+        guessed encoding
+    """
     command = ['nkf', '--guess=1', file_path]
     logger.debug('execute following command:\n{}'.format(command))
     external_process = subprocess.run(command, stdout=subprocess.PIPE)
