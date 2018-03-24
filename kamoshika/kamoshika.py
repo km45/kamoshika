@@ -18,12 +18,7 @@ Options:
                           - debug
 """
 
-import logging
-import os
-import typing
-
 import docopt
-import requests
 
 import config
 import log
@@ -38,30 +33,6 @@ def parse_options() -> dict:
     """
     parameters = docopt.docopt(__doc__)
     return parameters
-
-
-def query(server_config: typing.List[str],
-          request: dict,
-          logger: logging.Logger) -> typing.List[requests.Response]:
-    """Send a request and receive a responce for each server
-
-    Args:
-        server_config: server field of config
-        request: request to post
-        logger: logger instance
-
-    Returns:
-        list of received reponces
-    """
-
-    responces = []  # type: typing.List[requests.Response]
-    for index, server in enumerate(server_config):
-        number = index + 1
-        logger.info('start query {}/{}'.format(number, len(server_config)))
-        responces.append(strategy.fetch_responce(
-            server, request['parameter'], request.get('header'), logger))
-        logger.info('end query {}/{}'.format(number, len(server_config)))
-    return responces
 
 
 def main():
