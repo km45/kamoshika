@@ -184,16 +184,22 @@ def main():
 
     request = conf.get_request(parameters['<KEY>'], logger)
 
-    responces = query(conf.get_server_list(), request, logger)
+    strategy_instance = strategy.XmlStrategy(
+        parameters['--out'], conf.get_server_list(), request, logger)
+    strategy_instance.pre_query()
 
-    strategy.clear_output_directory(parameters['--out'], logger)
+    strategy_instance.query()
+    responces = strategy_instance.responces
 
+    # TODO: Move below process XmlStrategy.post_process()
     saved_file_paths = save_responces(
         responces, conf.get_responce(), parameters['--out'], logger)
 
+    # TODO: Move below process XmlStrategy.post_process()
     post_processed_paths = post_process(
         saved_file_paths, conf.get_responce(), parameters['--out'], logger)
 
+    # TODO: Move below process XmlStrategy.post_process()
     strategy.invoke_diff_viewer(post_processed_paths, logger)
 
 

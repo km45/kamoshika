@@ -134,3 +134,42 @@ def save_content_as_file(
         logger.info('save {} as {}'.format(explanation, output_file_path))
         out.write(content)
         logger.info('success to save {}'.format(output_file_path))
+
+
+class XmlStrategy:
+    def __init__(
+            self,
+            output_directory: str,
+            server_config: typing.List[str],
+            request: dict,
+            logger: logging.Logger) -> None:
+        """
+        Args:
+            output_directory: TBW
+            server_config: server field of config
+            request: request to post
+            logger: logger instance
+        """
+        self._output_directory = output_directory
+        self._server_config = server_config
+        self._request = request
+        self._logger = logger
+        self._responces = []  # type: typing.List[requests.Response]
+
+    def pre_query(self) -> None:
+        clear_output_directory(self._output_directory, self._logger)
+
+    def query(self) -> None:
+        """Send a request and receive a responce for each server"""
+        for index, server in enumerate(self._server_config):
+            number = index + 1
+            self._logger.info(
+                'start query {}/{}'.format(number, len(self._server_config)))
+            self._responces.append(fetch_responce(
+                server, self._request['parameter'], self._request.get('header'), self._logger))
+            self._logger.info(
+                'end query {}/{}'.format(number, len(self._server_config)))
+
+    @property
+    def responces(self):
+        return self._responces
