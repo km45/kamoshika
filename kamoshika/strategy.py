@@ -91,10 +91,10 @@ def save_content_as_file(
         logger: logger instance
     """
     if isinstance(content, bytes):
-        file_mode = 'b'
+        file_mode = 'wb'
     if isinstance(content, str):
-        file_mode = 't'
-    with open(output_file_path, 'w{}'.format(file_mode)) as out:
+        file_mode = 'wt'
+    with open(output_file_path, file_mode) as out:
         logger.info('save {} as {}'.format(explanation, output_file_path))
         out.write(content)
         logger.info('success to save {}'.format(output_file_path))
