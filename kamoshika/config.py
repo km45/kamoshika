@@ -18,14 +18,11 @@ class Config:
         self.__load(file_path, logger)
 
     def __load(self, file_path: str, logger: logging.Logger) -> None:
-        """Load config file
+        """Load config file and set its dictionary as self._content
 
         Args:
             file_path: config file path
             logger: logger instance
-
-        Returns:
-            content dictionary
         """
         with open(file_path) as yaml_file:
             self._content = yaml.load(yaml_file)
