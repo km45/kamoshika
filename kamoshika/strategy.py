@@ -75,6 +75,31 @@ def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.L
     subprocess.run(command)
 
 
+ContentType = typing.TypeVar(  # pylint: disable=invalid-name
+    'ContentType', str, bytes)
+
+
+def save_content_as_file(
+        output_file_path: str, explanation: str,
+        content: ContentType, logger: logging.Logger) -> None:
+    """save content as file
+
+    Args:
+        output_file_path: output file path
+        explanation: explanation for output file, used for only logging
+        content: binary or text to save as file
+        logger: logger instance
+    """
+    if isinstance(content, bytes):
+        file_mode = 'b'
+    if isinstance(content, str):
+        file_mode = 't'
+    with open(output_file_path, 'w{}'.format(file_mode)) as out:
+        logger.info('save {} as {}'.format(explanation, output_file_path))
+        out.write(content)
+        logger.info('success to save {}'.format(output_file_path))
+
+
 def save_binary_as_file(
         output_file_path: str, explanation: str,
         content: bytes, logger: logging.Logger) -> None:
@@ -86,10 +111,7 @@ def save_binary_as_file(
         content: binary to save as file
         logger: logger instance
     """
-    with open(output_file_path, 'wb') as out:
-        logger.info('save {} as {}'.format(explanation, output_file_path))
-        out.write(content)
-        logger.info('success to save {}'.format(output_file_path))
+    save_content_as_file(output_file_path, explanation, content, logger)
 
 
 def save_text_as_file(
@@ -103,7 +125,4 @@ def save_text_as_file(
         content: string to save as file
         logger: logger instance
     """
-    with open(output_file_path, 'wt') as out:
-        logger.info('save {} as {}'.format(explanation, output_file_path))
-        out.write(content)
-        logger.info('success to save {}'.format(output_file_path))
+    save_content_as_file(output_file_path, explanation, content, logger)
