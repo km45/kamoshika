@@ -29,6 +29,7 @@ import docopt
 import requests
 
 import config
+import log
 
 
 def create_logger(log_level: int) -> logging.Logger:
@@ -261,14 +262,7 @@ def main():
     """
     parameters = parse_options()
 
-    log_level_map = {
-        "fatal": logging.FATAL,
-        "error": logging.ERROR,
-        "warn": logging.WARN,
-        "info": logging.INFO,
-        "debug": logging.DEBUG
-    }
-    logger = create_logger(log_level_map[parameters['--log-level']])
+    logger = create_logger(log.LOG_LEVEL_MAP[parameters['--log-level']])
 
     logger.debug('parsed options:\n{}'.format(parameters))
 
