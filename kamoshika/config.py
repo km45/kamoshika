@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Load config file and access loaded data
+"""Load config file and access loaded data
 """
 
 import logging
