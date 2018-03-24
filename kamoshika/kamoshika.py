@@ -206,18 +206,6 @@ def post_process(saved_file_paths: typing.List[str],
     return post_processed_paths
 
 
-def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.Logger) -> None:
-    """invoke diff viewer
-
-    Args:
-        post_processed_paths: post processed paths, files or directories
-        logger: logger instance
-    """
-    command = ['meld'] + post_processed_paths
-    logger.debug('execute following command:\n{}'.format(command))
-    subprocess.run(command)
-
-
 def main():
     """main function
     """
@@ -241,7 +229,7 @@ def main():
     post_processed_paths = post_process(
         saved_file_paths, conf.get_responce(), parameters['--out'], logger)
 
-    invoke_diff_viewer(post_processed_paths, logger)
+    strategy.invoke_diff_viewer(post_processed_paths, logger)
 
 
 if __name__ == '__main__':
