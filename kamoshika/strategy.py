@@ -27,7 +27,7 @@ def clear_output_directory(directory: str, logger: logging.Logger) -> None:
 
 
 def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
-    """format xml
+    """Format xml
 
     Args:
         input_file_path: input xml file path to format
@@ -45,7 +45,7 @@ def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.L
 
 
 def guess_encoding(file_path: str, logger: logging.Logger) -> str:
-    """guess file encoding
+    """Guess file encoding
 
     Args:
         file_path: file path to guess encoding
@@ -64,7 +64,7 @@ def guess_encoding(file_path: str, logger: logging.Logger) -> str:
 
 
 def invoke_diff_viewer(post_processed_paths: typing.List[str], logger: logging.Logger) -> None:
-    """invoke diff viewer
+    """Invoke diff viewer
 
     Args:
         post_processed_paths: post processed paths, files or directories
@@ -82,7 +82,7 @@ ContentType = typing.TypeVar(  # pylint: disable=invalid-name
 def save_content_as_file(
         output_file_path: str, explanation: str,
         content: ContentType, logger: logging.Logger) -> None:
-    """save content as file
+    """Save content as file
 
     Args:
         output_file_path: output file path

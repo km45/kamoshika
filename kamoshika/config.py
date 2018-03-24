@@ -9,8 +9,7 @@ import yaml
 
 
 class Config:
-    """
-    Load config file and provide data accessor
+    """Load config file and provide data accessor
     """
 
     def __init__(self, file_path: str, logger: logging.Logger) -> None:
