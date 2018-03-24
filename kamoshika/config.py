@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Load config file and access loaded data
-"""
+"""Load config file and access loaded data"""
 
 import logging
 import typing
@@ -9,8 +8,7 @@ import yaml
 
 
 class Config:
-    """Load config file and provide data accessor
-    """
+    """Load config file and provide data accessor"""
 
     def __init__(self, file_path: str, logger: logging.Logger) -> None:
         self.__load(file_path, logger)

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Provide functions for pre_query, query and post_query
-"""
+"""Provide functions for pre_query, query and post_query"""
 
 import logging
 import os

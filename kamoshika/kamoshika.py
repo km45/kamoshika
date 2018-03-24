@@ -139,8 +139,7 @@ def post_process(saved_file_paths: typing.List[str],
 
 
 def main():
-    """main function
-    """
+    """main function"""
     parameters = parse_options()
 
     logger = log.create_logger(parameters['--log-level'])
