@@ -174,6 +174,7 @@ class XmlStrategy:
     def post_query(self) -> None:
         self.__save_responces()
         self.__post_process()
+        invoke_diff_viewer(self._post_processed_paths, self._logger)
 
     def __save_responces(self) -> None:
         """Save responces as files"""

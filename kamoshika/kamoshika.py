@@ -84,11 +84,6 @@ def main():
 
     strategy_instance.post_query()
 
-    post_processed_paths = strategy_instance.post_processed_paths
-
-    # TODO: Move below process XmlStrategy.post_process()
-    strategy.invoke_diff_viewer(post_processed_paths, logger)
-
 
 if __name__ == '__main__':
     main()
