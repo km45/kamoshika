@@ -15,9 +15,9 @@ class Config:
     """
 
     def __init__(self, file_path: str, logger: logging.Logger) -> None:
-        self._content = self.__load(file_path, logger)
+        self.__load(file_path, logger)
 
-    def __load(self, file_path: str, logger: logging.Logger) -> dict:
+    def __load(self, file_path: str, logger: logging.Logger) -> None:
         """Load config file
 
         Args:
@@ -28,11 +28,10 @@ class Config:
             content dictionary
         """
         with open(file_path) as yaml_file:
-            content = yaml.load(yaml_file)
+            self._content = yaml.load(yaml_file)
             logger.debug('loaded config ({}):\n{}'.format(
                 file_path,
-                yaml.dump(content, default_flow_style=False)))
-        return content
+                yaml.dump(self._content, default_flow_style=False)))
 
     def get_request(self, case_id: str, logger: logging.Logger) -> dict:
         """Search request for target case id
