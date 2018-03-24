@@ -3,10 +3,6 @@
 server:
   - 'http://localhost:8000'
   - 'http://localhost:8080'
-responce:
-  file_name_prefix: ''
-  file_name_postfix: .xml
-  post_process: xml
 request:
   - case-id: test1
     header:
