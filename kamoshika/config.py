@@ -8,10 +8,6 @@ class Config:
     def __init__(self, file_path: str, logger: logging.Logger) -> None:
         self._content = self.__load(file_path, logger)
 
-    @property
-    def content(self) -> dict:
-        return self._content
-
     def __load(self, file_path: str, logger: logging.Logger) -> dict:
         """Load config file
 
@@ -48,3 +44,9 @@ class Config:
                 return request
         logger.error('failed to find request (case-id = {})'.format(case_id))
         return None
+
+    def get_server_list(self) -> typing.List[str]:
+        return self._content['server']
+
+    def get_responce(self) -> dict:
+        return self._content['responce']

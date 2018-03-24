@@ -276,15 +276,15 @@ def main():
 
     request = conf.get_request(parameters['<KEY>'], logger)
 
-    responces = query(conf.content['server'], request, logger)
+    responces = query(conf.get_server_list(), request, logger)
 
     clear_output_directory(parameters['--out'], logger)
 
     saved_file_paths = save_responces(
-        responces, conf.content['responce'], parameters['--out'], logger)
+        responces, conf.get_responce(), parameters['--out'], logger)
 
     post_processed_paths = post_process(
-        saved_file_paths, conf.content['responce'], parameters['--out'], logger)
+        saved_file_paths, conf.get_responce(), parameters['--out'], logger)
 
     invoke_diff_viewer(post_processed_paths, logger)
 
