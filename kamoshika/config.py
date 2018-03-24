@@ -30,10 +30,6 @@ class Config:
         return content
 
 
-def load_config(file_path: str, logger: logging.Logger) -> dict:
-    return Config(file_path, logger).content
-
-
 def get_request(request_config: typing.List[dict], case_id: str, logger: logging.Logger) -> dict:
     """Search request for target case id
 

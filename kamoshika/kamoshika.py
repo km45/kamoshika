@@ -272,20 +272,20 @@ def main():
 
     logger.debug('parsed options:\n{}'.format(parameters))
 
-    loaded_config = config.load_config(parameters['--config'], logger)
+    conf = config.Config(parameters['--config'], logger)
 
     request = config.get_request(
-        loaded_config['request'], parameters['<KEY>'], logger)
+        conf.content['request'], parameters['<KEY>'], logger)
 
-    responces = query(loaded_config['server'], request, logger)
+    responces = query(conf.content['server'], request, logger)
 
     clear_output_directory(parameters['--out'], logger)
 
     saved_file_paths = save_responces(
-        responces, loaded_config['responce'], parameters['--out'], logger)
+        responces, conf.content['responce'], parameters['--out'], logger)
 
     post_processed_paths = post_process(
-        saved_file_paths, loaded_config['responce'], parameters['--out'], logger)
+        saved_file_paths, conf.content['responce'], parameters['--out'], logger)
 
     invoke_diff_viewer(post_processed_paths, logger)
 
