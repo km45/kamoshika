@@ -58,24 +58,8 @@ def query(server_config: typing.List[str],
     for index, server in enumerate(server_config):
         number = index + 1
         logger.info('start query {}/{}'.format(number, len(server_config)))
-        with requests.Session() as session:
-            prepared = requests.Request(
-                'GET',
-                server,
-                params=request['parameter'],
-                headers=request.get('header')).prepare()
-            logger.info('prepared request:\n'
-                        'parameter:\n'
-                        '{}\n'
-                        'headers:\n'
-                        '{}\n'.format(prepared.url, prepared.headers))
-            responce = session.send(prepared)
-            logger.info('received responce:\n'
-                        'status code:\n'
-                        '{}\n'
-                        'headers:\n'
-                        '{}\n'.format(responce.status_code, responce.headers))
-            responces.append(responce)
+        responces.append(strategy.fetch_responce(
+            server, request['parameter'], request.get('header'), logger))
         logger.info('end query {}/{}'.format(number, len(server_config)))
     return responces
 

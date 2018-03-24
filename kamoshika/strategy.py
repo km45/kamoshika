@@ -9,6 +9,8 @@ import subprocess
 import typing
 import xml.dom.minidom
 
+import requests
+
 
 def clear_output_directory(directory: str, logger: logging.Logger) -> None:
     """Clear output directory
@@ -42,6 +44,40 @@ def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.L
         logger.debug('read file ({}):\n{}\n'.format(
             input_file_path, read_file))
         return xml.dom.minidom.parseString(read_file).toprettyxml()
+
+
+def fetch_responce(
+        server: str, request_parameter: str,
+        request_headers: dict, logger: logging.Logger) -> requests.Response:
+    """Send a request and receive a responce
+
+    Args:
+        server: server path
+        request_parameter: request parameter
+        request_headers: dictionary of request headers
+        logger: logger instance
+
+    Returns
+        received responce
+    """
+    with requests.Session() as session:
+        prepared = requests.Request(
+            'GET',
+            server,
+            params=request_parameter,
+            headers=request_headers).prepare()
+        logger.info('prepared request:\n'
+                    'parameter:\n'
+                    '{}\n'
+                    'headers:\n'
+                    '{}\n'.format(prepared.url, prepared.headers))
+        responce = session.send(prepared)
+        logger.info('received responce:\n'
+                    'status code:\n'
+                    '{}\n'
+                    'headers:\n'
+                    '{}\n'.format(responce.status_code, responce.headers))
+        return responce
 
 
 def guess_encoding(file_path: str, logger: logging.Logger) -> str:
