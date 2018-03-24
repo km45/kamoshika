@@ -136,6 +136,7 @@ def save_content_as_file(
 
 
 class XmlStrategy:
+    """Strategy for xml"""
     def __init__(
             self,
             output_directory: str,
@@ -158,6 +159,7 @@ class XmlStrategy:
         self._post_processed_paths = []  # type: typing.List[str]
 
     def pre_query(self) -> None:
+        """Clear output directory"""
         clear_output_directory(self._output_directory, self._logger)
 
     def query(self) -> None:
@@ -172,6 +174,7 @@ class XmlStrategy:
                 'end query {}/{}'.format(number, len(self._server_config)))
 
     def post_query(self) -> None:
+        """Save responce, format xml, and invoke diff viewer"""
         self.__save_responces()
         self.__post_process()
         invoke_diff_viewer(self._post_processed_paths, self._logger)
