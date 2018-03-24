@@ -152,10 +152,8 @@ def post_process_to_single_file(saved_file_path: str,
         processed_file_name = '{}{}f{}'.format(
             file_name_prefix, number, file_name_postfix)
         processed_file_path = os.path.join(out_directory, processed_file_name)
-        with open(processed_file_path, 'wt') as out:
-            logger.info('save formated xml as {}'.format(processed_file_path))
-            out.write(formatted_xml)
-        logger.info('success to save {}'.format(processed_file_path))
+        strategy.save_text_as_file(
+            processed_file_path, 'formated xml', formatted_xml, logger)
         return processed_file_path
     else:
         # nothing to do
