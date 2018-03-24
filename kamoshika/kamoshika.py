@@ -27,7 +27,6 @@ import xml.dom.minidom
 
 import docopt
 import requests
-import yaml
 
 import config
 
