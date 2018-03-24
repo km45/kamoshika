@@ -5,6 +5,10 @@ import yaml
 
 
 class Config:
+    """
+    Load config file and provide data accessor
+    """
+
     def __init__(self, file_path: str, logger: logging.Logger) -> None:
         self._content = self.__load(file_path, logger)
 
@@ -46,7 +50,17 @@ class Config:
         return None
 
     def get_server_list(self) -> typing.List[str]:
+        """Return server config
+
+        Returns:
+            list of servers
+        """
         return self._content['server']
 
     def get_responce(self) -> dict:
+        """Return responce config
+
+        Returns:
+            dictionary of responce config
+        """
         return self._content['responce']
