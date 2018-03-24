@@ -274,8 +274,7 @@ def main():
 
     conf = config.Config(parameters['--config'], logger)
 
-    request = config.get_request(
-        conf.content['request'], parameters['<KEY>'], logger)
+    request = conf.get_request(parameters['<KEY>'], logger)
 
     responces = query(conf.content['server'], request, logger)
 
