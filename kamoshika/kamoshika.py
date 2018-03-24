@@ -28,6 +28,8 @@ import docopt
 import requests
 import yaml
 
+import config
+
 
 def create_logger(log_level: int) -> logging.Logger:
     """Create logger instance
@@ -60,24 +62,6 @@ def parse_options() -> dict:
     """
     parameters = docopt.docopt(__doc__)
     return parameters
-
-
-def load_config(file_path: str, logger: logging.Logger) -> dict:
-    """Load config file
-
-    Args:
-        file_path: config file path
-        logger: logger instance
-
-    Returns:
-        content dictionary
-    """
-    with open(file_path) as yaml_file:
-        content = yaml.load(yaml_file)
-        logger.debug('loaded config ({}):\n{}'.format(
-            file_path,
-            yaml.dump(content, default_flow_style=False)))
-    return content
 
 
 def get_request(request_config: typing.List[dict], case_id: str, logger: logging.Logger) -> dict:
@@ -309,19 +293,20 @@ def main():
 
     logger.debug('parsed options:\n{}'.format(parameters))
 
-    config = load_config(parameters['--config'], logger)
+    loaded_config = config.load_config(parameters['--config'], logger)
 
-    request = get_request(config['request'], parameters['<KEY>'], logger)
+    request = get_request(
+        loaded_config['request'], parameters['<KEY>'], logger)
 
-    responces = query(config['server'], request, logger)
+    responces = query(loaded_config['server'], request, logger)
 
     clear_output_directory(parameters['--out'], logger)
 
     saved_file_paths = save_responces(
-        responces, config['responce'], parameters['--out'], logger)
+        responces, loaded_config['responce'], parameters['--out'], logger)
 
     post_processed_paths = post_process(
-        saved_file_paths, config['responce'], parameters['--out'], logger)
+        saved_file_paths, loaded_config['responce'], parameters['--out'], logger)
 
     invoke_diff_viewer(post_processed_paths, logger)
 
