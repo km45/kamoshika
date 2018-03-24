@@ -137,6 +137,7 @@ def save_content_as_file(
 
 class XmlStrategy:
     """Strategy for xml"""
+
     def __init__(
             self,
             output_directory: str,
