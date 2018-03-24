@@ -27,7 +27,7 @@ import requests
 
 import config
 import log
-import strategy
+import xml_strategy
 
 
 def parse_options() -> dict:
@@ -77,7 +77,7 @@ def main():
     request = conf.get_request(parameters['<KEY>'], logger)
 
     # TODO: Support other strategies
-    strategy_instance = strategy.XmlStrategy(
+    strategy_instance = xml_strategy.XmlStrategy(
         parameters['--out'], conf.get_server_list(), request, logger)
 
     strategy_instance.pre_query()
