@@ -145,7 +145,7 @@ class XmlStrategy:
             logger: logging.Logger) -> None:
         """
         Args:
-            output_directory: TBW
+            output_directory: directory where save files
             server_config: server field of config
             request: request to post
             logger: logger instance
