@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+Provide method that creates logger instance and define log level map
+"""
+
 import logging
 
 
