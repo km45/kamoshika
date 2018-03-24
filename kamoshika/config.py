@@ -53,11 +53,3 @@ class Config:
             list of servers
         """
         return self._content['server']
-
-    def get_responce(self) -> dict:
-        """Return responce config
-
-        Returns:
-            dictionary of responce config
-        """
-        return self._content['responce']

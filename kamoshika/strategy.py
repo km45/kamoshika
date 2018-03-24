@@ -155,6 +155,7 @@ class XmlStrategy:
         self._logger = logger
         self._responces = []  # type: typing.List[requests.Response]
         self._saved_file_paths = []  # type: typing.List[str]
+        self._post_processed_paths = []  # type: typing.List[str]
 
     def pre_query(self) -> None:
         clear_output_directory(self._output_directory, self._logger)
@@ -172,6 +173,7 @@ class XmlStrategy:
 
     def post_query(self) -> None:
         self.__save_responces()
+        self.__post_process()
 
     def __save_responces(self) -> None:
         """Save responces as files"""
@@ -190,10 +192,44 @@ class XmlStrategy:
                 self._logger)
             self._saved_file_paths.append(file_path)
 
+    def __post_process_to_single_file(
+            self, saved_file_path: str, number: int)-> str:
+        """Do post process to single file
+
+        Args:
+            saved_file_path: saved file path to process
+            number: target file number
+
+        Returns:
+            processed file path
+        """
+        saved_file_encoding = guess_encoding(saved_file_path, self._logger)
+        formatted_xml = format_xml(
+            saved_file_path, saved_file_encoding, self._logger)
+
+        # save file
+        processed_file_name = '{}f.xml'.format(number)
+        processed_file_path = os.path.join(
+            self._output_directory, processed_file_name)
+        save_content_as_file(
+            processed_file_path, 'formated xml', formatted_xml, self._logger)
+        return processed_file_path
+
+    def __post_process(self) -> None:
+        """Do post process for each files"""
+        for index, path in enumerate(self._saved_file_paths):
+            number = index + 1
+            self._logger.info(
+                'start post process {}/{}'.format(number, len(self._saved_file_paths)))
+            self._post_processed_paths.append(
+                self.__post_process_to_single_file(path, number))
+            self._logger.info(
+                'end post process {}/{}'.format(number, len(self._saved_file_paths)))
+
     @property
-    def saved_file_paths(self) -> typing.List[str]:
+    def post_processed_paths(self) -> typing.List[str]:
         """
         Returns:
-            saved file paths
+            processed file paths
         """
-        return self._saved_file_paths
+        return self._post_processed_paths
