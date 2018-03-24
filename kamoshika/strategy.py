@@ -155,6 +155,7 @@ class XmlStrategy:
         self._request = request
         self._logger = logger
         self._responces = []  # type: typing.List[requests.Response]
+        self._saved_file_paths = []  # type: typing.List[str]
 
     def pre_query(self) -> None:
         clear_output_directory(self._output_directory, self._logger)
@@ -170,6 +171,30 @@ class XmlStrategy:
             self._logger.info(
                 'end query {}/{}'.format(number, len(self._server_config)))
 
+    def post_query(self) -> None:
+        self.__save_responces()
+
+    def __save_responces(self) -> None:
+        """Save responces as files"""
+        self._logger.info(
+            'create output directory: {}'.format(self._output_directory))
+        os.makedirs(self._output_directory)
+
+        for index, responce in enumerate(self._responces):
+            number = index + 1
+            file_name = '{}.xml'.format(number)
+            file_path = os.path.join(self._output_directory, file_name)
+            save_content_as_file(
+                file_path,
+                'responce body for query {}'.format(number),
+                responce.content,
+                self._logger)
+            self._saved_file_paths.append(file_path)
+
     @property
-    def responces(self):
-        return self._responces
+    def saved_file_paths(self) -> typing.List[str]:
+        """
+        Returns:
+            saved file paths
+        """
+        return self._saved_file_paths

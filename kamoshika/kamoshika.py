@@ -64,39 +64,6 @@ def query(server_config: typing.List[str],
     return responces
 
 
-def save_responces(responces: typing.List[requests.Response],
-                   responce_conf: dict,
-                   out_directory: str,
-                   logger: logging.Logger) -> typing.List[str]:
-    """Save responces as files
-
-    Args:
-        responces: list of responce instance
-        responce_conf: responce field of config
-        out_directory: directory where save files
-        logger: logger instance
-
-    Returns:
-        saved file paths
-    """
-    logger.info('create output directory: {}'.format(out_directory))
-    os.makedirs(out_directory)
-
-    file_name_prefix = responce_conf['file_name_prefix']
-    file_name_postfix = responce_conf['file_name_postfix']
-
-    saved_files = []  # type: typing.List[str]
-    for index, responce in enumerate(responces):
-        number = index + 1
-        file_name = '{}{}{}'.format(
-            file_name_prefix, number, file_name_postfix)
-        file_path = os.path.join(out_directory, file_name)
-        strategy.save_content_as_file(
-            file_path, 'responce body for query {}'.format(number), responce.content, logger)
-        saved_files.append(file_path)
-    return saved_files
-
-
 def post_process_to_single_file(saved_file_path: str,
                                 responce_conf: dict,
                                 out_directory: str,
@@ -189,11 +156,9 @@ def main():
     strategy_instance.pre_query()
 
     strategy_instance.query()
-    responces = strategy_instance.responces
 
-    # TODO: Move below process XmlStrategy.post_process()
-    saved_file_paths = save_responces(
-        responces, conf.get_responce(), parameters['--out'], logger)
+    strategy_instance.post_query()
+    saved_file_paths = strategy_instance.saved_file_paths
 
     # TODO: Move below process XmlStrategy.post_process()
     post_processed_paths = post_process(
