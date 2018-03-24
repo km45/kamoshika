@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Changed
+
+- Change directory layout
+
 ---
 
 ## [v0.5.0] - 2018/03/21
