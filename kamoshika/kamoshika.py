@@ -107,7 +107,7 @@ def save_responces(responces: typing.List[requests.Response],
         file_name = '{}{}{}'.format(
             file_name_prefix, number, file_name_postfix)
         file_path = os.path.join(out_directory, file_name)
-        strategy.save_binary_as_file(
+        strategy.save_content_as_file(
             file_path, 'responce body for query {}'.format(number), responce.content, logger)
         saved_files.append(file_path)
     return saved_files
@@ -152,7 +152,7 @@ def post_process_to_single_file(saved_file_path: str,
         processed_file_name = '{}{}f{}'.format(
             file_name_prefix, number, file_name_postfix)
         processed_file_path = os.path.join(out_directory, processed_file_name)
-        strategy.save_text_as_file(
+        strategy.save_content_as_file(
             processed_file_path, 'formated xml', formatted_xml, logger)
         return processed_file_path
     else:

@@ -98,31 +98,3 @@ def save_content_as_file(
         logger.info('save {} as {}'.format(explanation, output_file_path))
         out.write(content)
         logger.info('success to save {}'.format(output_file_path))
-
-
-def save_binary_as_file(
-        output_file_path: str, explanation: str,
-        content: bytes, logger: logging.Logger) -> None:
-    """save binary as file
-
-    Args:
-        output_file_path: output file path
-        explanation: explanation for output file, used for only logging
-        content: binary to save as file
-        logger: logger instance
-    """
-    save_content_as_file(output_file_path, explanation, content, logger)
-
-
-def save_text_as_file(
-        output_file_path: str, explanation: str,
-        content: str, logger: logging.Logger) -> None:
-    """save text as file
-
-    Args:
-        output_file_path: output file path
-        explanation: explanation for output file, used for only logging
-        content: string to save as file
-        logger: logger instance
-    """
-    save_content_as_file(output_file_path, explanation, content, logger)
