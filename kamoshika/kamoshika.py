@@ -20,7 +20,6 @@ Options:
 
 import logging
 import os
-import shutil
 import subprocess
 import typing
 import xml.dom.minidom
@@ -30,6 +29,7 @@ import requests
 
 import config
 import log
+import strategy
 
 
 def parse_options() -> dict:
@@ -80,22 +80,6 @@ def query(server_config: typing.List[str],
             responces.append(responce)
         logger.info('end query {}/{}'.format(number, len(server_config)))
     return responces
-
-
-def clear_output_directory(directory: str, logger: logging.Logger) -> None:
-    """Clear output directory
-
-    Args:
-        directory: directory to remove recursively
-        logger: logger instance
-    """
-    logger.debug(
-        'remove directory "{}" recursively if exists'.format(directory))
-
-    if os.path.exists(directory):
-        logger.debug('directory "{}" exists'.format(directory))
-        logger.warn('remove directory "{}" recursively'.format(directory))
-        shutil.rmtree(directory)
 
 
 def save_responces(responces: typing.List[requests.Response],
@@ -249,7 +233,7 @@ def main():
 
     responces = query(conf.get_server_list(), request, logger)
 
-    clear_output_directory(parameters['--out'], logger)
+    strategy.clear_output_directory(parameters['--out'], logger)
 
     saved_file_paths = save_responces(
         responces, conf.get_responce(), parameters['--out'], logger)
