@@ -4,6 +4,7 @@
 Usage:
   kamoshika.py [-c <FILE>] [-o <DIRECTORY>] [--log-level <LEVEL>] <KEY>
   kamoshika.py -h | --help
+  kamoshika.py --version
 
 Options:
   -h --help             show this
@@ -16,12 +17,14 @@ Options:
                           - warn
                           - info
                           - debug
+  --version             show version
 """
 
 import docopt
 
 import config
 import log
+import version
 import xml_strategy
 
 
@@ -31,7 +34,7 @@ def parse_options() -> dict:
     Returns:
         result dictionary
     """
-    parameters = docopt.docopt(__doc__)
+    parameters = docopt.docopt(__doc__, version=version.__version__)
     return parameters
 
 
