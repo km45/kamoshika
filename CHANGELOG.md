@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Added
+
+- Add version option `--version`
+
 ---
 
 ## [v0.7.0] - 2018/03/25
