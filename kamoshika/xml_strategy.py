@@ -9,8 +9,6 @@ import xml.dom.minidom
 
 import requests
 
-import utility
-
 
 def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
     """Format xml
@@ -143,10 +141,6 @@ class XmlStrategy:
         self._responces = []  # type: typing.List[requests.Response]
         self._saved_file_paths = []  # type: typing.List[str]
         self._post_processed_paths = []  # type: typing.List[str]
-
-    def pre_query(self) -> None:
-        """Clear output directory"""
-        utility.clear_output_directory(self._output_directory, self._logger)
 
     def query(self) -> None:
         """Send a request and receive a responce for each server"""
