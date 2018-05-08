@@ -3,28 +3,11 @@
 
 import logging
 import os
-import shutil
 import subprocess
 import typing
 import xml.dom.minidom
 
 import requests
-
-
-def clear_output_directory(directory: str, logger: logging.Logger) -> None:
-    """Clear output directory
-
-    Args:
-        directory: directory to remove recursively
-        logger: logger instance
-    """
-    logger.debug(
-        'remove directory "{}" recursively if exists'.format(directory))
-
-    if os.path.exists(directory):
-        logger.debug('directory "{}" exists'.format(directory))
-        logger.warn('remove directory "{}" recursively'.format(directory))
-        shutil.rmtree(directory)
 
 
 def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
@@ -158,10 +141,6 @@ class XmlStrategy:
         self._responces = []  # type: typing.List[requests.Response]
         self._saved_file_paths = []  # type: typing.List[str]
         self._post_processed_paths = []  # type: typing.List[str]
-
-    def pre_query(self) -> None:
-        """Clear output directory"""
-        clear_output_directory(self._output_directory, self._logger)
 
     def query(self) -> None:
         """Send a request and receive a responce for each server"""

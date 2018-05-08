@@ -24,6 +24,7 @@ import docopt
 
 import config
 import log
+import utility
 import version
 import xml_strategy
 
@@ -54,7 +55,7 @@ def main():
     strategy_instance = xml_strategy.XmlStrategy(
         parameters['--out'], conf.get_server_list(), request, logger)
 
-    strategy_instance.pre_query()
+    utility.clear_output_directory(parameters['--out'], logger)
     strategy_instance.query()
     strategy_instance.post_query()
 
