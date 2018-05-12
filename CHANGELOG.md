@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Added
+
+- Add `pipenv run exec`
+
 ---
 
 ## [v0.8.0] - 2018/05/12

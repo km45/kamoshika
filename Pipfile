@@ -23,4 +23,5 @@ python_version = "3.6"
 
 [scripts]
 
+exec = "python -m kamoshika.kamoshika"
 lint = "pylint kamoshika"
