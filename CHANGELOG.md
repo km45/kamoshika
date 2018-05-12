@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Added
 
 - Add version option `--version`
+- Support pipenv
+
+### Remove
+
+- Remove requirements.txt, use pipfile instead
 
 ---
 
