@@ -7,7 +7,7 @@ function lint_config() {
 function lint_scripts() {
   files=$(find -type f | grep py$ | grep -v misc)
 
-  pylint ${files}
+  pipenv run lint
   mypy --ignore-missing-imports ${files}
 }
 

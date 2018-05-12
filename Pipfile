@@ -1,14 +1,26 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
+
 [packages]
+
 docopt = "*"
 pyyaml = "*"
 requests = "*"
 
+
 [dev-packages]
 
+
+
 [requires]
+
 python_version = "3.6"
+
+
+[scripts]
+
+lint = "pylint kamoshika"
