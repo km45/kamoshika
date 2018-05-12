@@ -22,11 +22,11 @@ Options:
 
 import docopt
 
-import config
-import log
-import utility
-import version
-import xml_strategy
+import kamoshika.config
+import kamoshika.log
+import kamoshika.utility
+import kamoshika.version
+import kamoshika.xml_strategy
 
 
 def parse_options() -> dict:
@@ -35,7 +35,7 @@ def parse_options() -> dict:
     Returns:
         result dictionary
     """
-    parameters = docopt.docopt(__doc__, version=version.__version__)
+    parameters = docopt.docopt(__doc__, version=kamoshika.version.__version__)
     return parameters
 
 
@@ -43,19 +43,19 @@ def main():
     """main function"""
     parameters = parse_options()
 
-    logger = log.create_logger(parameters['--log-level'])
+    logger = kamoshika.log.create_logger(parameters['--log-level'])
 
     logger.debug('parsed options:\n{}'.format(parameters))
 
-    conf = config.Config(parameters['--config'], logger)
+    conf = kamoshika.config.Config(parameters['--config'], logger)
 
     request = conf.get_request(parameters['<KEY>'], logger)
 
     # TODO: Support other strategies
-    strategy_instance = xml_strategy.XmlStrategy(
+    strategy_instance = kamoshika.xml_strategy.XmlStrategy(
         parameters['--out'], conf.get_server_list(), request, logger)
 
-    utility.clear_output_directory(parameters['--out'], logger)
+    kamoshika.utility.clear_output_directory(parameters['--out'], logger)
     strategy_instance.query()
     strategy_instance.post_query()
 
