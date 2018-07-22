@@ -1,0 +1,22 @@
+# 最終的なイメージ
+post-query-filters:
+  - name: tee
+    config:
+      path: "raw"
+  - name: extract-zip
+  - name: tee
+    config:
+      path: "extracted"
+  - name: format-json
+    config:
+      path: "summary.json"
+  - name: pb2json
+    config:
+      src: "hoge.pb"
+      dst: "hoge.txt"
+      root: "hoge_pb.hoge.Result"
+  - name: dump
+    config:
+      files:
+        - "summary.json"
+        - "hoge.txt"
