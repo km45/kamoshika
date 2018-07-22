@@ -7,6 +7,7 @@ function lint_config() {
 function lint_scripts() {
   pipenv run lint
   mypy --ignore-missing-imports kamoshika
+  mypy tests
 }
 
 function main() {
