@@ -24,4 +24,4 @@ def execute(output_directory: str,
     for index, single_host in enumerate(stream):
         dump_files(
             single_host,
-            os.path.join(output_directory, '{}'.format(index), config['dst']))
+            os.path.join(output_directory, config['dst'], '{}'.format(index)))
