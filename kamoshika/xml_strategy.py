@@ -165,13 +165,11 @@ class XmlStrategy:
                 self._logger)
             self._saved_file_paths.append(file_path)
 
-    def __post_process_to_single_file(
-            self, saved_file_path: str, number: int) -> None:
+    def __post_process_to_single_file(self, saved_file_path: str) -> None:
         """Do post process to single file
 
         Args:
             saved_file_path: saved file path to process
-            number: target file number
         """
         saved_file_encoding = guess_encoding(saved_file_path, self._logger)
         formatted_xml = format_xml(
@@ -186,7 +184,7 @@ class XmlStrategy:
             number = index + 1
             self._logger.info(
                 'start post process {}/{}'.format(number, len(self._saved_file_paths)))
-            self.__post_process_to_single_file(path, number)
+            self.__post_process_to_single_file(path)
             self._logger.info(
                 'end post process {}/{}'.format(number, len(self._saved_file_paths)))
 
