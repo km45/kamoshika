@@ -143,7 +143,7 @@ class XmlStrategy:
         self._responces = []  # type: typing.List[requests.Response]
         self._saved_file_paths = []  # type: typing.List[str]
         self._post_processed_paths = []  # type: typing.List[str]
-        self._post_query_stream: kamoshika.postquery.PostQueryStream = {}
+        self._post_query_stream: kamoshika.postquery.PostQueryStream = []
 
     def query(self) -> None:
         """Send a request and receive a responce for each server"""
@@ -200,8 +200,8 @@ class XmlStrategy:
             self._output_directory, processed_file_name)
         save_content_as_file(
             processed_file_path, 'formated xml', formatted_xml, self._logger)
-        self._post_query_stream[processed_file_name] = formatted_xml.encode(
-            'utf8')
+        self._post_query_stream.append(
+            {'responce.xml': formatted_xml.encode('utf8')})
         return processed_file_path
 
     def __post_process(self) -> None:
