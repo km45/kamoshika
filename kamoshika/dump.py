@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import logging
 import os.path
 import typing
+
+import kamoshika.postquery
 
 
 def dump_files(src: typing.Dict[str, bytes], dst: str) -> None:
@@ -11,3 +14,14 @@ def dump_files(src: typing.Dict[str, bytes], dst: str) -> None:
             os.makedirs(to_dirname)
         with open(to_filename, 'wb') as to_file:
             to_file.write(from_bytes)
+
+
+def execute(output_directory: str,
+            stream: kamoshika.postquery.PostQueryStream,
+            config: dict,
+            logger: logging.Logger) -> None:
+    logger.debug('config: {}'.format(config))
+    for index, single_host in enumerate(stream):
+        dump_files(
+            single_host,
+            os.path.join(output_directory, '{}'.format(index), config['dst']))

@@ -23,6 +23,7 @@ Options:
 import docopt
 
 import kamoshika.config
+import kamoshika.dump
 import kamoshika.log
 import kamoshika.utility
 import kamoshika.version
@@ -58,6 +59,10 @@ def main():
     kamoshika.utility.clear_output_directory(parameters['--out'], logger)
     strategy_instance.query()
     strategy_instance.post_query()
+
+    pqstream: kamoshika.postquery.PostQueryStream = strategy_instance.get_post_query_stream()
+    kamoshika.dump.execute(
+        parameters['--out'], pqstream, conf.get_post_query_filters()[0]['config'], logger)
 
 
 if __name__ == '__main__':
