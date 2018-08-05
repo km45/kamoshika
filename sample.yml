@@ -21,3 +21,7 @@ post-query-filters:
   - filter: dump
     config:
       dst: done
+  - filter: invoke-diff-viewer
+    config:
+      dumped-dir: done
+      target-path: responce.xml

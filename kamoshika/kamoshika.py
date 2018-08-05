@@ -23,6 +23,7 @@ Options:
 import docopt
 
 import kamoshika.config
+import kamoshika.diffviewer
 import kamoshika.dump
 import kamoshika.log
 import kamoshika.utility
@@ -61,8 +62,17 @@ def main():
     strategy_instance.post_query()
 
     pqstream: kamoshika.postquery.PostQueryStream = strategy_instance.get_post_query_stream()
-    kamoshika.dump.execute(
-        parameters['--out'], pqstream, conf.get_post_query_filters()[0]['config'], logger)
+    # TODO: Use filter name specified in config file to select filter
+    filters = [
+        kamoshika.dump,
+        kamoshika.diffviewer
+    ]
+    for index, filter in enumerate(filters):
+        filter.execute(
+            parameters['--out'],
+            pqstream,
+            conf.get_post_query_filters()[index]['config'], logger
+        )
 
 
 if __name__ == '__main__':
