@@ -17,3 +17,7 @@ request:
     header:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
+post-query-filters:
+  - filter: dump
+    config:
+      dst: done

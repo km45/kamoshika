@@ -36,4 +36,4 @@ post-query-filters:
       root: hoge_pb.hoge.Result
   - filter: dump
     config:
-      dst: result
+      dst: done
