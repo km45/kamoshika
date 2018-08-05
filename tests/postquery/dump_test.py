@@ -3,7 +3,7 @@
 import filecmp
 import os.path
 
-import kamoshika.dump
+import kamoshika.postquery.dump
 
 
 def report(expected_dir: str, actual_dir: str)->str:
@@ -37,7 +37,7 @@ def test_dump_single_content(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual)
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())
@@ -53,7 +53,7 @@ def test_dump_multiple_flat_contents(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual)
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())
@@ -75,7 +75,7 @@ def test_dump_multiple_nested_contents(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual)
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())

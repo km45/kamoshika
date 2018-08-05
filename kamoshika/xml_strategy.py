@@ -9,7 +9,7 @@ import xml.dom.minidom
 
 import requests
 
-import kamoshika.postquery
+import kamoshika.postquery.stream
 
 
 def format_xml(input_file_path: str, input_file_encoding: str, logger: logging.Logger) -> str:
@@ -130,7 +130,7 @@ class XmlStrategy:
         self._logger = logger
         self._responces = []  # type: typing.List[requests.Response]
         self._saved_file_paths = []  # type: typing.List[str]
-        self._post_query_stream: kamoshika.postquery.PostQueryStream = []
+        self._post_query_stream: kamoshika.postquery.stream.PostQueryStream = []
 
     def query(self) -> None:
         """Send a request and receive a responce for each server"""
@@ -190,5 +190,5 @@ class XmlStrategy:
             self._logger.info(
                 'end post process {}/{}'.format(number, len(self._saved_file_paths)))
 
-    def get_post_query_stream(self) -> kamoshika.postquery.PostQueryStream:
+    def get_post_query_stream(self) -> kamoshika.postquery.stream.PostQueryStream:
         return self._post_query_stream

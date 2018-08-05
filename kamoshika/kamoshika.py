@@ -23,9 +23,10 @@ Options:
 import docopt
 
 import kamoshika.config
-import kamoshika.diffviewer
-import kamoshika.dump
 import kamoshika.log
+import kamoshika.postquery.diffviewer
+import kamoshika.postquery.dump
+import kamoshika.postquery.stream
 import kamoshika.utility
 import kamoshika.version
 import kamoshika.xml_strategy
@@ -61,11 +62,11 @@ def main():
     strategy_instance.query()
     strategy_instance.post_query()
 
-    pqstream: kamoshika.postquery.PostQueryStream = strategy_instance.get_post_query_stream()
+    pqstream: kamoshika.postquery.stream.PostQueryStream = strategy_instance.get_post_query_stream()
     # TODO: Use filter name specified in config file to select filter
     filters = [
-        kamoshika.dump,
-        kamoshika.diffviewer
+        kamoshika.postquery.dump,
+        kamoshika.postquery.diffviewer
     ]
     for index, filter in enumerate(filters):
         filter.execute(

@@ -4,7 +4,7 @@ import os
 import subprocess
 import typing
 
-import kamoshika.postquery
+import kamoshika.postquery.stream
 
 
 def invoke_diff_viewer(paths: typing.List[str], logger: logging.Logger) -> None:
@@ -20,7 +20,7 @@ def invoke_diff_viewer(paths: typing.List[str], logger: logging.Logger) -> None:
 
 
 def execute(output_directory: str,
-            stream: kamoshika.postquery.PostQueryStream,
+            stream: kamoshika.postquery.stream.PostQueryStream,
             config: dict,
             logger: logging.Logger) -> None:
     logger.debug('config: {}'.format(config))

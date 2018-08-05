@@ -3,7 +3,7 @@ import logging
 import os.path
 import typing
 
-import kamoshika.postquery
+import kamoshika.postquery.stream
 
 
 def dump_files(src: typing.Dict[str, bytes], dst: str) -> None:
@@ -17,7 +17,7 @@ def dump_files(src: typing.Dict[str, bytes], dst: str) -> None:
 
 
 def execute(output_directory: str,
-            stream: kamoshika.postquery.PostQueryStream,
+            stream: kamoshika.postquery.stream.PostQueryStream,
             config: dict,
             logger: logging.Logger) -> None:
     logger.debug('config: {}'.format(config))
