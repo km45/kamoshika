@@ -66,7 +66,7 @@ class XmlStrategy:
         self._responces = []  # type: typing.List[requests.Response]
         self._post_query_stream: kamoshika.postquery.stream.PostQueryStream = []
 
-    def query(self) -> None:
+    def query(self) -> kamoshika.postquery.stream.PostQueryStream:
         """Send a request and receive a responce for each server"""
         for index, server in enumerate(self._server_config):
             number = index + 1
@@ -77,10 +77,6 @@ class XmlStrategy:
             self._logger.info(
                 'end query {}/{}'.format(number, len(self._server_config)))
 
-    def post_query(self) -> None:
-        """Save responce, format xml, and invoke diff viewer"""
         for responce in self._responces:
             self._post_query_stream.append({'responce.xml': responce.content})
-
-    def get_post_query_stream(self) -> kamoshika.postquery.stream.PostQueryStream:
         return self._post_query_stream
