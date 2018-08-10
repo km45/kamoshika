@@ -63,19 +63,13 @@ def main():
     strategy_instance.post_query()
 
     pqstream: kamoshika.postquery.stream.PostQueryStream = strategy_instance.get_post_query_stream()
-    # TODO: Use filter name specified in config file to select filter
-    filters = [
-        'kamoshika.postquery.encoding',
-        'kamoshika.postquery.prettify',
-        'kamoshika.postquery.dump',
-        'kamoshika.postquery.diffviewer'
-    ]
-    for index, filter in enumerate(filters):
-        executor = getattr(importlib.import_module(filter), 'execute')
+
+    for filter in conf.get_post_query_filters():
+        executor = getattr(importlib.import_module(filter['filter']), 'execute')
         executor(
             parameters['--out'],
             pqstream,
-            conf.get_post_query_filters()[index]['config'], logger
+            filter['config'], logger
         )
 
 
