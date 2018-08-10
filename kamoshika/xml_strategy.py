@@ -50,26 +50,24 @@ def fetch_responce(
         return responce
 
 
-def guess_encoding(file_path: str, logger: logging.Logger) -> str:
-    """Guess file encoding
+def guess_encoding(target: bytes, logger: logging.Logger) -> str:
+    """Guess encoding
 
     Args:
-        file_path: file path to guess encoding
+        target: bytes to guess encoding
         logger: logger instance
 
     Returns:
         guessed encoding
     """
-    with open(file_path, 'rb') as file:
-        command = ['nkf', '--guess=1']
-        logger.debug('execute following command:\n{}'.format(command))
-        external_process = subprocess.run(
-            command, input=file.read(), stdout=subprocess.PIPE)
-        file_encoding = external_process.stdout.decode().rstrip('\n')
-        logger.debug('guessed encoding of file {}: {}'.format(
-            file_path, file_encoding))
+    command = ['nkf', '--guess=1']
+    logger.debug('execute following command:\n{}'.format(command))
+    external_process = subprocess.run(
+        command, input=target, stdout=subprocess.PIPE)
+    result = external_process.stdout.decode().rstrip('\n')
+    logger.debug('guessed encoding: {}'.format(result))
 
-    return file_encoding
+    return result
 
 
 ContentType = typing.TypeVar(  # pylint: disable=invalid-name
@@ -160,9 +158,10 @@ class XmlStrategy:
         Args:
             saved_file_path: saved file path to process
         """
-        saved_file_encoding = guess_encoding(saved_file_path, self._logger)
         with open(saved_file_path, 'br') as file:
-            xml = to_utf8(file.read(), saved_file_encoding)
+            content = file.read()
+            saved_file_encoding = guess_encoding(content, self._logger)
+            xml = to_utf8(content, saved_file_encoding)
 
         self._post_query_stream.append({'responce.xml': xml})
 
