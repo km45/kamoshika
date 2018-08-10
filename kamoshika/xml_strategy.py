@@ -109,7 +109,9 @@ class XmlStrategy:
     def post_query(self) -> None:
         """Save responce, format xml, and invoke diff viewer"""
         self.__save_responces()
-        self.__post_process()
+        for path in self._saved_file_paths:
+            with open(path, 'rb') as file:
+                self._post_query_stream.append({'responce.xml': file.read()})
 
     def __save_responces(self) -> None:
         """Save responces as files"""
@@ -127,17 +129,6 @@ class XmlStrategy:
                 responce.content,
                 self._logger)
             self._saved_file_paths.append(file_path)
-
-    def __post_process(self) -> None:
-        """Do post process for each files"""
-        for index, path in enumerate(self._saved_file_paths):
-            number = index + 1
-            self._logger.info(
-                'start post process {}/{}'.format(number, len(self._saved_file_paths)))
-            with open(path, 'rb') as file:
-                self._post_query_stream.append({'responce.xml': file.read()})
-            self._logger.info(
-                'end post process {}/{}'.format(number, len(self._saved_file_paths)))
 
     def get_post_query_stream(self) -> kamoshika.postquery.stream.PostQueryStream:
         return self._post_query_stream
