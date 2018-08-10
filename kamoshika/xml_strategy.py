@@ -12,10 +12,6 @@ import requests
 import kamoshika.postquery.stream
 
 
-def to_utf8(input: bytes, input_encoding: str) -> bytes:
-    return input.decode(input_encoding).encode('utf8')
-
-
 def fetch_responce(
         server: str, request_parameter: str,
         request_headers: dict, logger: logging.Logger) -> requests.Response:
@@ -48,26 +44,6 @@ def fetch_responce(
                     'headers:\n'
                     '{}\n'.format(responce.status_code, responce.headers))
         return responce
-
-
-def guess_encoding(target: bytes, logger: logging.Logger) -> str:
-    """Guess encoding
-
-    Args:
-        target: bytes to guess encoding
-        logger: logger instance
-
-    Returns:
-        guessed encoding
-    """
-    command = ['nkf', '--guess=1']
-    logger.debug('execute following command:\n{}'.format(command))
-    external_process = subprocess.run(
-        command, input=target, stdout=subprocess.PIPE)
-    result = external_process.stdout.decode().rstrip('\n')
-    logger.debug('guessed encoding: {}'.format(result))
-
-    return result
 
 
 ContentType = typing.TypeVar(  # pylint: disable=invalid-name
@@ -160,10 +136,8 @@ class XmlStrategy:
         """
         with open(saved_file_path, 'br') as file:
             content = file.read()
-            saved_file_encoding = guess_encoding(content, self._logger)
-            xml = to_utf8(content, saved_file_encoding)
 
-        self._post_query_stream.append({'responce.xml': xml})
+        self._post_query_stream.append({'responce.xml': content})
 
     def __post_process(self) -> None:
         """Do post process for each files"""
