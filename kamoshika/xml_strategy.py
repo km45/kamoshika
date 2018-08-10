@@ -74,12 +74,15 @@ def guess_encoding(file_path: str, logger: logging.Logger) -> str:
     Returns:
         guessed encoding
     """
-    command = ['nkf', '--guess=1', file_path]
-    logger.debug('execute following command:\n{}'.format(command))
-    external_process = subprocess.run(command, stdout=subprocess.PIPE)
-    file_encoding = external_process.stdout.decode().rstrip('\n')
-    logger.debug('guessed encoding of file {}: {}'.format(
-        file_path, file_encoding))
+    with open(file_path, 'rb') as file:
+        command = ['nkf', '--guess=1']
+        logger.debug('execute following command:\n{}'.format(command))
+        external_process = subprocess.run(
+            command, input=file.read(), stdout=subprocess.PIPE)
+        file_encoding = external_process.stdout.decode().rstrip('\n')
+        logger.debug('guessed encoding of file {}: {}'.format(
+            file_path, file_encoding))
+
     return file_encoding
 
 
