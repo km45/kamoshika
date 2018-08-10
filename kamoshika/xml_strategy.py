@@ -12,24 +12,26 @@ import requests
 import kamoshika.postquery.stream
 
 
-def format_xml(input: bytes, input_encoding: str, logger: logging.Logger) -> str:
+def to_utf8(input: bytes, input_encoding: str) -> bytes:
+    return input.decode(input_encoding).encode('utf8')
+
+
+def format_xml(input: str, logger: logging.Logger) -> str:
     """Format xml
 
     Args:
         input: xml to format
-        input_encoding: encoding of input
         logger: logger instance
 
     Returns:
         formatted xml
     """
-    from_xml = input.decode(input_encoding)
-    logger.debug('before:\n{}'.format(from_xml))
+    logger.debug('before:\n{}'.format(input))
 
-    to_xml = xml.dom.minidom.parseString(from_xml).toprettyxml()
-    logger.debug('after:\n{}'.format(to_xml))
+    output = xml.dom.minidom.parseString(input).toprettyxml()
+    logger.debug('after:\n{}'.format(output))
 
-    return to_xml
+    return output
 
 
 def fetch_responce(
@@ -178,8 +180,8 @@ class XmlStrategy:
         """
         saved_file_encoding = guess_encoding(saved_file_path, self._logger)
         with open(saved_file_path, 'br') as file:
-            formatted_xml = format_xml(
-                file.read(), saved_file_encoding, self._logger)
+            from_xml = to_utf8(file.read(), saved_file_encoding)
+            formatted_xml = format_xml(from_xml,  self._logger)
 
         self._post_query_stream.append(
             {'responce.xml': formatted_xml.encode('utf8')})
