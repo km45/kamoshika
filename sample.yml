@@ -1,8 +1,8 @@
 ---
 
 server:
-  - 'http://localhost:8000'
-  - 'http://localhost:8080'
+  - 'http://localhost:8000/misc/1.xml'
+  - 'http://localhost:8000/misc/2.xml'
 request:
   - case-id: test1
     header:
@@ -17,3 +17,24 @@ request:
     header:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
+post-query-filters:
+  - filter: kamoshika.postquery.dump
+    config:
+      dst: raw
+  - filter: kamoshika.postquery.encoding
+    config:
+      format: xml
+      guess-from: true
+      target-path: responce.xml
+      to: UTF-8
+  - filter: kamoshika.postquery.prettify
+    config:
+      format: xml
+      target-path: responce.xml
+  - filter: kamoshika.postquery.dump
+    config:
+      dst: done
+  - filter: kamoshika.postquery.diffviewer
+    config:
+      dumped-dir: done
+      target-path: responce.xml

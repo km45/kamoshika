@@ -1,0 +1,43 @@
+---
+
+# 最終的なイメージ
+query:
+  mode: stateful
+  config:
+    dst:
+      - raw_responce_first.zip
+      - raw_responce_second.zip
+# mode: stateless
+# config:
+#   dst:
+#     - raw_responce.zip
+post-query-filters:
+  - filter: dump
+    config:
+      dst: raw
+  - filter: extract-zip
+    config:
+      src: raw_responce_first.zip
+      dst: first
+  - filter: extract-zip
+    config:
+      src: raw_responce_second.zip
+      dst: second
+  - filter: dump
+    config:
+      dst: extracted
+  - filter: format-json
+    config:
+      path: summary.json
+  - filter: pb2json
+    config:
+      src: first/hoge.pb
+      dst: first/hoge.txt
+      root: hoge_pb.hoge.Result
+  - filter: dump
+    config:
+      dst: done
+  - filter: invoke-diff-viewer
+    config:
+      dumped-dir: done
+      target-path: .

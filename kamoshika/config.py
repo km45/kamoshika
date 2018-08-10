@@ -53,3 +53,11 @@ class Config:
             list of servers
         """
         return self._content['server']
+
+    def get_post_query_filters(self) -> dict:
+        """Return post query filters config
+
+        Returns:
+            post query filter settings
+        """
+        return self._content['post-query-filters']

@@ -9,6 +9,14 @@ pyyaml = "*"
 requests = "*"
 
 [dev-packages]
+mypy = "*"
+pylint = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.6"
+
+[scripts]
+exec = "python -m kamoshika.kamoshika"
+lint = "pylint kamoshika tests"
+test = "python -m pytest tests"
