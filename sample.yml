@@ -18,20 +18,20 @@ request:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
 post-query-filters:
-  - filter: encoding
+  - filter: kamoshika.postquery.encoding
     config:
       format: xml
       guess-from: true
       target-path: responce.xml
       to: UTF-8
-  - filter: prettify
+  - filter: kamoshika.postquery.prettify
     config:
       format: xml
       target-path: responce.xml
-  - filter: dump
+  - filter: kamoshika.postquery.dump
     config:
       dst: done
-  - filter: invoke-diff-viewer
+  - filter: kamoshika.postquery.diffviewer
     config:
       dumped-dir: done
       target-path: responce.xml
