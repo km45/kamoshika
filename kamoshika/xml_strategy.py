@@ -128,24 +128,14 @@ class XmlStrategy:
                 self._logger)
             self._saved_file_paths.append(file_path)
 
-    def __post_process_to_single_file(self, saved_file_path: str) -> None:
-        """Do post process to single file
-
-        Args:
-            saved_file_path: saved file path to process
-        """
-        with open(saved_file_path, 'br') as file:
-            content = file.read()
-
-        self._post_query_stream.append({'responce.xml': content})
-
     def __post_process(self) -> None:
         """Do post process for each files"""
         for index, path in enumerate(self._saved_file_paths):
             number = index + 1
             self._logger.info(
                 'start post process {}/{}'.format(number, len(self._saved_file_paths)))
-            self.__post_process_to_single_file(path)
+            with open(path, 'rb') as file:
+                self._post_query_stream.append({'responce.xml': file.read()})
             self._logger.info(
                 'end post process {}/{}'.format(number, len(self._saved_file_paths)))
 
