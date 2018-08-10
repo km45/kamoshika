@@ -46,31 +46,6 @@ def fetch_responce(
         return responce
 
 
-ContentType = typing.TypeVar(  # pylint: disable=invalid-name
-    'ContentType', str, bytes)
-
-
-def save_content_as_file(
-        output_file_path: str, explanation: str,
-        content: ContentType, logger: logging.Logger) -> None:
-    """Save content as file
-
-    Args:
-        output_file_path: output file path
-        explanation: explanation for output file, used for only logging
-        content: binary or text to save as file
-        logger: logger instance
-    """
-    if isinstance(content, bytes):
-        file_mode = 'wb'
-    if isinstance(content, str):
-        file_mode = 'wt'
-    with open(output_file_path, file_mode) as out:
-        logger.info('save {} as {}'.format(explanation, output_file_path))
-        out.write(content)
-        logger.info('success to save {}'.format(output_file_path))
-
-
 class XmlStrategy:
     """Strategy for xml"""
 
@@ -92,7 +67,6 @@ class XmlStrategy:
         self._request = request
         self._logger = logger
         self._responces = []  # type: typing.List[requests.Response]
-        self._saved_file_paths = []  # type: typing.List[str]
         self._post_query_stream: kamoshika.postquery.stream.PostQueryStream = []
 
     def query(self) -> None:
@@ -108,27 +82,8 @@ class XmlStrategy:
 
     def post_query(self) -> None:
         """Save responce, format xml, and invoke diff viewer"""
-        self.__save_responces()
-        for path in self._saved_file_paths:
-            with open(path, 'rb') as file:
-                self._post_query_stream.append({'responce.xml': file.read()})
-
-    def __save_responces(self) -> None:
-        """Save responces as files"""
-        self._logger.info(
-            'create output directory: {}'.format(self._output_directory))
-        os.makedirs(self._output_directory)
-
-        for index, responce in enumerate(self._responces):
-            number = index + 1
-            file_name = '{}.xml'.format(number)
-            file_path = os.path.join(self._output_directory, file_name)
-            save_content_as_file(
-                file_path,
-                'responce body for query {}'.format(number),
-                responce.content,
-                self._logger)
-            self._saved_file_paths.append(file_path)
+        for responce in self._responces:
+            self._post_query_stream.append({'responce.xml': responce.content})
 
     def get_post_query_stream(self) -> kamoshika.postquery.stream.PostQueryStream:
         return self._post_query_stream

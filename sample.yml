@@ -18,6 +18,9 @@ request:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
 post-query-filters:
+  - filter: kamoshika.postquery.dump
+    config:
+      dst: raw
   - filter: kamoshika.postquery.encoding
     config:
       format: xml
