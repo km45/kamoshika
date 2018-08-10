@@ -1,9 +1,17 @@
 # -*- coding: utf-8 -*-
 
 import filecmp
+import logging
 import os.path
 
 import kamoshika.postquery.dump
+
+
+def null_logger() -> logging.Logger:
+    handler = logging.NullHandler
+    logger = logging.getLogger(__name__)
+    logger.addHandler(handler)
+    return logger
 
 
 def report(expected_dir: str, actual_dir: str)->str:
@@ -37,7 +45,7 @@ def test_dump_single_content(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.postquery.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual, null_logger())
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())
@@ -53,7 +61,7 @@ def test_dump_multiple_flat_contents(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.postquery.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual, null_logger())
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())
@@ -75,7 +83,7 @@ def test_dump_multiple_nested_contents(tmpdir):
     }
 
     actual = tmpdir.mkdir('actual')
-    kamoshika.postquery.dump.dump_files(src, actual)
+    kamoshika.postquery.dump.dump_files(src, actual, null_logger())
 
     expected = tmpdir.mkdir('expected')
     expected.join('a.txt').write('aaa'.encode())
