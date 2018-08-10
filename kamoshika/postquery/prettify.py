@@ -34,7 +34,7 @@ def execute(output_directory: str,
 
     if format == 'xml':
         for index, single_host in enumerate(stream):
-            result = format_xml(single_host[path].decode(), logging)
+            result = format_xml(single_host[path].decode(), logger)
             single_host[path] = result.encode()
     else:
         logger.warning('Invalid format is specified: {}'.format(format))
