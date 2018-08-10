@@ -14,6 +14,11 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Added
 
 - Add `pipenv run exec`
+- Add `post-query-filters`
+
+### Remove
+
+- Remove XmlStrategy.post_query(), use `post-query-filters`
 
 ---
 

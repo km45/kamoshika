@@ -20,10 +20,13 @@ Options:
   --version             show version
 """
 
+import importlib
+
 import docopt
 
 import kamoshika.config
 import kamoshika.log
+import kamoshika.postquery.stream
 import kamoshika.utility
 import kamoshika.version
 import kamoshika.xml_strategy
@@ -56,8 +59,17 @@ def main():
         parameters['--out'], conf.get_server_list(), request, logger)
 
     kamoshika.utility.clear_output_directory(parameters['--out'], logger)
-    strategy_instance.query()
-    strategy_instance.post_query()
+
+    pqstream: kamoshika.postquery.stream.PostQueryStream = strategy_instance.query()
+
+    for filter in conf.get_post_query_filters():
+        executor = getattr(importlib.import_module(
+            filter['filter']), 'execute')
+        executor(
+            parameters['--out'],
+            pqstream,
+            filter['config'], logger
+        )
 
 
 if __name__ == '__main__':
