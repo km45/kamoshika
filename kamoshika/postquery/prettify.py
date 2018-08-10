@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-import xml
+import xml.dom.minidom
 
 import kamoshika.postquery.stream
 
@@ -33,7 +33,7 @@ def execute(output_directory: str,
     path: str = config['target-path']
 
     if format == 'xml':
-        for index, single_host in enumerate(stream):
+        for single_host in stream:
             result = format_xml(single_host[path].decode(), logger)
             single_host[path] = result.encode()
     else:

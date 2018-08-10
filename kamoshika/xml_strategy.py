@@ -2,10 +2,7 @@
 """Provide functions for pre_query, query and post_query"""
 
 import logging
-import os
-import subprocess
 import typing
-import xml.dom.minidom
 
 import requests
 
