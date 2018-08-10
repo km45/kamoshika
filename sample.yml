@@ -18,6 +18,10 @@ request:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
 post-query-filters:
+  - filter: prettify
+    config:
+      format: xml
+      target-path: responce.xml
   - filter: dump
     config:
       dst: done

@@ -16,24 +16,6 @@ def to_utf8(input: bytes, input_encoding: str) -> bytes:
     return input.decode(input_encoding).encode('utf8')
 
 
-def format_xml(input: str, logger: logging.Logger) -> str:
-    """Format xml
-
-    Args:
-        input: xml to format
-        logger: logger instance
-
-    Returns:
-        formatted xml
-    """
-    logger.debug('before:\n{}'.format(input))
-
-    output = xml.dom.minidom.parseString(input).toprettyxml()
-    logger.debug('after:\n{}'.format(output))
-
-    return output
-
-
 def fetch_responce(
         server: str, request_parameter: str,
         request_headers: dict, logger: logging.Logger) -> requests.Response:
@@ -180,11 +162,9 @@ class XmlStrategy:
         """
         saved_file_encoding = guess_encoding(saved_file_path, self._logger)
         with open(saved_file_path, 'br') as file:
-            from_xml = to_utf8(file.read(), saved_file_encoding)
-            formatted_xml = format_xml(from_xml,  self._logger)
+            xml = to_utf8(file.read(), saved_file_encoding)
 
-        self._post_query_stream.append(
-            {'responce.xml': formatted_xml.encode('utf8')})
+        self._post_query_stream.append({'responce.xml': xml})
 
     def __post_process(self) -> None:
         """Do post process for each files"""
