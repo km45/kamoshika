@@ -63,7 +63,8 @@ def main():
     pqstream: kamoshika.postquery.stream.PostQueryStream = strategy_instance.query()
 
     for filter in conf.get_post_query_filters():
-        executor = getattr(importlib.import_module(filter['filter']), 'execute')
+        executor = getattr(importlib.import_module(
+            filter['filter']), 'execute')
         executor(
             parameters['--out'],
             pqstream,
