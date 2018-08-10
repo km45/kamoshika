@@ -20,14 +20,12 @@ Options:
   --version             show version
 """
 
+import importlib
+
 import docopt
 
 import kamoshika.config
 import kamoshika.log
-import kamoshika.postquery.diffviewer
-import kamoshika.postquery.dump
-import kamoshika.postquery.encoding
-import kamoshika.postquery.prettify
 import kamoshika.postquery.stream
 import kamoshika.utility
 import kamoshika.version
@@ -67,13 +65,14 @@ def main():
     pqstream: kamoshika.postquery.stream.PostQueryStream = strategy_instance.get_post_query_stream()
     # TODO: Use filter name specified in config file to select filter
     filters = [
-        kamoshika.postquery.encoding,
-        kamoshika.postquery.prettify,
-        kamoshika.postquery.dump,
-        kamoshika.postquery.diffviewer
+        'kamoshika.postquery.encoding',
+        'kamoshika.postquery.prettify',
+        'kamoshika.postquery.dump',
+        'kamoshika.postquery.diffviewer'
     ]
     for index, filter in enumerate(filters):
-        filter.execute(
+        executor = getattr(importlib.import_module(filter), 'execute')
+        executor(
             parameters['--out'],
             pqstream,
             conf.get_post_query_filters()[index]['config'], logger
