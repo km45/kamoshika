@@ -1,8 +1,8 @@
 ---
 
 server:
-  - 'http://localhost:8000'
-  - 'http://localhost:8080'
+  - 'http://localhost:8000/misc/1.xml'
+  - 'http://localhost:8000/misc/2.xml'
 request:
   - case-id: test1
     header:
