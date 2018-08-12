@@ -14,6 +14,7 @@ shell:
 lint:
 	python -m flake8 kamoshika tests
 	python -m mypy --ignore-missing-imports kamoshika tests
+	python -m pylint kamoshika tests
 
 .PHONY: test
 test:
