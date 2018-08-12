@@ -10,16 +10,9 @@ server development routine worker "kamoshika"
 
 [GitHubFlow]:https://guides.github.com/introduction/flow/
 
-## Branch status
+## Status
 
-### master
+[![BuildStatus]][CiUrl]
 
-[![BuildStatusForMaster]][CiUrl]
-
-### develop
-
-[![BuildStatusForDevelop]][CiUrl]
-
-[BuildStatusForMaster]: https://travis-ci.org/km45/kamoshika.svg?branch=master
-[BuildStatusForDevelop]: https://travis-ci.org/km45/kamoshika.svg?branch=develop
+[BuildStatus]: https://travis-ci.org/km45/kamoshika.svg?branch=master
 [CiUrl]: https://travis-ci.org/km45/kamoshika
