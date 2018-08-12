@@ -26,7 +26,10 @@ class Config:
                 file_path,
                 yaml.dump(self._content, default_flow_style=False)))
 
-    def get_request(self, case_id: str, logger: logging.Logger) -> dict:
+    def get_request(
+            self,
+            case_id: str,
+            logger: logging.Logger) -> typing.Optional[dict]:
         """Search request for target case id
 
         Args:

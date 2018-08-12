@@ -10,8 +10,10 @@ from kamoshika.postquery.stream import PostQueryStream
 
 
 def fetch_responce(
-        server: str, request_parameter: str,
-        request_headers: dict, logger: logging.Logger) -> requests.Response:
+        server: str,
+        request_parameter: str,
+        request_headers: typing.Optional[dict],
+        logger: logging.Logger) -> requests.Response:
     """Send a request and receive a responce
 
     Args:
