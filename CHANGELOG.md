@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+---
+
+## [v0.9.2] - 2018/08/13
+
 ### Added
 
 - Support lint: use `make lint`
@@ -18,6 +22,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Changed
 
 - Change base image of docker container: `python:3.7-alpine` -> `python:3.7-slim-stretch`
+
+[v0.9.2]: https://github.com/km45/kamoshika/releases/tag/v0.9.2
 
 ---
 
