@@ -4,16 +4,15 @@ server development routine worker "kamoshika"
 
 "serow", an acronym for "server development routine worker", is called "kamoshika" in Japanese.
 
-## Branch status
+## For developers
 
-### master
+`kamoshika` follows [GitHub Flow](GitHubFlow).
 
-[![BuildStatusForMaster]][CiUrl]
+[GitHubFlow]:https://guides.github.com/introduction/flow/
 
-### develop
+## Status
 
-[![BuildStatusForDevelop]][CiUrl]
+[![BuildStatus]][CiUrl]
 
-[BuildStatusForMaster]: https://travis-ci.org/km45/kamoshika.svg?branch=master
-[BuildStatusForDevelop]: https://travis-ci.org/km45/kamoshika.svg?branch=develop
+[BuildStatus]: https://travis-ci.org/km45/kamoshika.svg?branch=master
 [CiUrl]: https://travis-ci.org/km45/kamoshika
