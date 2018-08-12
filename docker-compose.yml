@@ -4,4 +4,4 @@ services:
   develop:
     build: .
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/app:rw
