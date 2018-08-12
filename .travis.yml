@@ -2,5 +2,6 @@ services: docker
 
 script:
   - make up
+  - docker-compose exec develop make lint
   - docker-compose exec develop make test
   - make down
