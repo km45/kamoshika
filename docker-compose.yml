@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  develop:
+    build: .
+    volumes:
+      - .:/usr/src/app

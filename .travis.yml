@@ -1,0 +1,6 @@
+services: docker
+
+script:
+  - make up
+  - docker-compose exec develop make test
+  - make down
