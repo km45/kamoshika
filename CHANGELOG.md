@@ -19,6 +19,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 - Support travis-ci
 
+[v0.9.1]: https://github.com/km45/kamoshika/releases/tag/v0.9.1
+
 ---
 
 ## [v0.9.0] - 2018/08/11
@@ -32,6 +34,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 - Remove XmlStrategy.post_query(), use `post-query-filters`
 
+[v0.9.0]: https://github.com/km45/kamoshika/releases/tag/v0.9.0
+
 ---
 
 ## [v0.8.0] - 2018/05/12
@@ -44,6 +48,8 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 ### Remove
 
 - Remove requirements.txt, use pipfile instead
+
+[v0.8.0]: https://github.com/km45/kamoshika/releases/tag/v0.8.0
 
 ---
 
