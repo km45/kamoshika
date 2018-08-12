@@ -12,10 +12,10 @@ shell:
 
 .PHONY: lint
 lint:
-	python -m flake8 kamoshika tests
-	python -m mypy --ignore-missing-imports kamoshika tests
-	python -m pylint --errors-only kamoshika tests
+	flake8 kamoshika tests
+	mypy --ignore-missing-imports kamoshika tests
+	pylint --errors-only kamoshika tests
 
 .PHONY: test
 test:
-	python -m pytest tests
+	pytest tests
