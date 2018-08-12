@@ -1,24 +1,11 @@
-FROM python:3.7-alpine
+FROM python:3.7-slim-stretch
 
-RUN apk update \
-    && apk add \
-      curl \
-      gcc \
-      make \
-      libc-dev \
-    && rm -rf /var/cache/apk/*
-
-#
-# Install nkf
-#
-ENV NKF_VERSION 2.1.4
-
-RUN curl -fSL "https://osdn.jp/dl/nkf/nkf-${NKF_VERSION}.tar.gz" | tar vxz \
-  && cd "nkf-${NKF_VERSION}" \
-  && make \
-  && make install \
-  && cd .. \
-  && rm -rf "nkf-${NKF_VERSION}"
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+    make \
+    nkf \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/*
 
 #
 # Install pipenv
