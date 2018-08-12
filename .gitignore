@@ -1,6 +1,7 @@
 # development
 .mypy_cache
 .pytest_cache
+/.pylint.d
 
 # use
 out
