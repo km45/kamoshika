@@ -29,10 +29,10 @@ def execute(output_directory: str,
             logger: logging.Logger) -> None:
     logger.debug('config: {}'.format(config))
 
-    format: str = config['format']
+    mode: str = config['format']
     path: str = config['target-path']
 
-    if format == 'xml':
+    if mode == 'xml':
         for single_host in stream:
             result = format_xml(single_host[path].decode(), logger)
             single_host[path] = result.encode()

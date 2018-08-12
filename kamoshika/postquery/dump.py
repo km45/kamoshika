@@ -6,7 +6,10 @@ import typing
 import kamoshika.postquery.stream
 
 
-def dump_files(src: typing.Dict[str, bytes], dst: str, logger: logging.Logger) -> None:
+def dump_files(
+        src: typing.Dict[str, bytes],
+        dst: str,
+        logger: logging.Logger) -> None:
     for src_key, from_bytes in src.items():
         to_filename = os.path.join(dst, src_key)
         to_dirname = os.path.dirname(to_filename)

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import chardet
 
 from kamoshika.postquery.encoding import change_encoding, guess_encoding
 
