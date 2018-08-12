@@ -8,11 +8,11 @@ server development routine worker "kamoshika"
 
 ### master
 
-[![BuildStatusForMaster]](CiUrl)
+[![BuildStatusForMaster]][CiUrl]
 
 ### develop
 
-[![BuildStatusForDevelop]](CiUrl)
+[![BuildStatusForDevelop]][CiUrl]
 
 [BuildStatusForMaster]: https://travis-ci.org/km45/kamoshika.svg?branch=master
 [BuildStatusForDevelop]: https://travis-ci.org/km45/kamoshika.svg?branch=develop
