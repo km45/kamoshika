@@ -21,15 +21,15 @@ RUN curl -fSL "https://osdn.jp/dl/nkf/nkf-${NKF_VERSION}.tar.gz" | tar vxz \
   && rm -rf "nkf-${NKF_VERSION}"
 
 #
-# Install pip
+# Install pipenv
 #
 RUN pip install pipenv
 
+#
+# Install python packages
+#
 WORKDIR /tmp/docker/pipenv
 
-#
-# Install nkf
-#
 COPY Pipfile Pipfile.lock /tmp/docker/pipenv/
 
 RUN pipenv install --dev --system
