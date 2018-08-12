@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+### Changed
+
+- Change base image of docker container: `python:3.7-alpine` -> `python:3.7-slim-stretch`
+
 ---
 
 ## [v0.9.1] - 2018/08/12
