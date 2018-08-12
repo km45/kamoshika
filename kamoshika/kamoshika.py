@@ -48,7 +48,7 @@ def main():
 
     logger = kamoshika.log.create_logger(parameters['--log-level'])
 
-    logger.debug('parsed options:\n{}'.format(parameters))
+    logger.debug('parsed options:\n%s', parameters)
 
     conf = kamoshika.config.Config(parameters['--config'], logger)
 
@@ -62,13 +62,13 @@ def main():
 
     pqstream: PostQueryStream = strategy_instance.query()
 
-    for filter in conf.get_post_query_filters():
+    for filter_conf in conf.get_post_query_filters():
         executor = getattr(importlib.import_module(
-            filter['filter']), 'execute')
+            filter_conf['filter']), 'execute')
         executor(
             parameters['--out'],
             pqstream,
-            filter['config'], logger
+            filter_conf['config'], logger
         )
 
 

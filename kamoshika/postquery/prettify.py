@@ -5,25 +5,25 @@ import xml.dom.minidom
 import kamoshika.postquery.stream
 
 
-def format_xml(input: str, logger: logging.Logger) -> str:
+def format_xml(input_string: str, logger: logging.Logger) -> str:
     """Format xml
 
     Args:
-        input: xml to format
+        input_string: xml to format
         logger: logger instance
 
     Returns:
         formatted xml
     """
-    logger.debug('before:\n{}'.format(input))
+    logger.debug('before:\n{}'.format(input_string))
 
-    output = xml.dom.minidom.parseString(input).toprettyxml()
+    output = xml.dom.minidom.parseString(input_string).toprettyxml()
     logger.debug('after:\n{}'.format(output))
 
     return output
 
 
-def execute(output_directory: str,
+def execute(_: str,
             stream: kamoshika.postquery.stream.PostQueryStream,
             config: dict,
             logger: logging.Logger) -> None:
