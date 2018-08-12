@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog] and this project adheres to [Semantic 
 
 ## Unreleased
 
+---
+
+## [v0.9.1] - 2018/08/12
+
 ### Added
 
 - Support travis-ci
