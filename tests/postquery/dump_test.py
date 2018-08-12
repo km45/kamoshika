@@ -10,7 +10,7 @@ import kamoshika.postquery.dump
 def null_logger() -> logging.Logger:
     handler = logging.NullHandler
     logger = logging.getLogger(__name__)
-    logger.addHandler(handler)
+    logger.addHandler(handler)  # type: ignore
     return logger
 
 

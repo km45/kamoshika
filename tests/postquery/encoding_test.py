@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import chardet
 
 from kamoshika.postquery.encoding import change_encoding, guess_encoding
 
@@ -17,7 +16,7 @@ test_data: str = '''<?xml version="1.0" encoding="UTF-8"?>
 def null_logger() -> logging.Logger:
     handler = logging.NullHandler
     logger = logging.getLogger(__name__)
-    logger.addHandler(handler)
+    logger.addHandler(handler)  # type: ignore
     return logger
 
 

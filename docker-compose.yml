@@ -3,5 +3,7 @@ version: "3"
 services:
   develop:
     build: .
+    environment:
+      HOME: /usr/src/app
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/app:rw

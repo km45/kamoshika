@@ -1,8 +1,9 @@
 # development
-.mypy_cache
-.pytest_cache
+/.mypy_cache
+/.pytest_cache
+/.pylint.d
 
 # use
-out
-kamoshika.yml
+/out
+/kamoshika.yml
 __pycache__

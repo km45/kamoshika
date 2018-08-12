@@ -12,10 +12,10 @@ requests = "*"
 mypy = "*"
 pylint = "*"
 pytest = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.6"
 
 [scripts]
 exec = "python -m kamoshika.kamoshika"
-lint = "pylint kamoshika tests"

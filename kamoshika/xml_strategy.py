@@ -6,12 +6,14 @@ import typing
 
 import requests
 
-import kamoshika.postquery.stream
+from kamoshika.postquery.stream import PostQueryStream
 
 
 def fetch_responce(
-        server: str, request_parameter: str,
-        request_headers: dict, logger: logging.Logger) -> requests.Response:
+        server: str,
+        request_parameter: str,
+        request_headers: typing.Optional[dict],
+        logger: logging.Logger) -> requests.Response:
     """Send a request and receive a responce
 
     Args:
@@ -64,16 +66,19 @@ class XmlStrategy:
         self._request = request
         self._logger = logger
         self._responces = []  # type: typing.List[requests.Response]
-        self._post_query_stream: kamoshika.postquery.stream.PostQueryStream = []
+        self._post_query_stream: PostQueryStream = []
 
-    def query(self) -> kamoshika.postquery.stream.PostQueryStream:
+    def query(self) -> PostQueryStream:
         """Send a request and receive a responce for each server"""
         for index, server in enumerate(self._server_config):
             number = index + 1
             self._logger.info(
                 'start query {}/{}'.format(number, len(self._server_config)))
             self._responces.append(fetch_responce(
-                server, self._request['parameter'], self._request.get('header'), self._logger))
+                server,
+                self._request['parameter'],
+                self._request.get('header'),
+                self._logger))
             self._logger.info(
                 'end query {}/{}'.format(number, len(self._server_config)))
 

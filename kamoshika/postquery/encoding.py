@@ -5,8 +5,11 @@ import subprocess
 import kamoshika.postquery.stream
 
 
-def change_encoding(input: bytes, input_encoding: str, output_encoding: str) -> bytes:
-    return input.decode(input_encoding).encode(output_encoding)
+def change_encoding(
+        input_bytes: bytes,
+        input_encoding: str,
+        output_encoding: str) -> bytes:
+    return input_bytes.decode(input_encoding).encode(output_encoding)
 
 
 def guess_encoding(target: bytes, logger: logging.Logger) -> str:
@@ -29,7 +32,7 @@ def guess_encoding(target: bytes, logger: logging.Logger) -> str:
     return result
 
 
-def execute(output_directory: str,
+def execute(_: str,
             stream: kamoshika.postquery.stream.PostQueryStream,
             config: dict,
             logger: logging.Logger) -> None:
@@ -39,10 +42,11 @@ def execute(output_directory: str,
     path: str = config['target-path']
     to_encoding: str = config['to']
 
-    for index, single_host in enumerate(stream):
+    for single_host in stream:
         from_encoding: str = guess_encoding(
             single_host[path], logger) if guess_from else config['from']
-        logger.debug('change encoding: {} -> {}'.format(from_encoding, to_encoding))
+        logger.debug(
+            'change encoding: {} -> {}'.format(from_encoding, to_encoding))
 
         result = change_encoding(single_host[path], from_encoding, to_encoding)
         single_host[path] = result

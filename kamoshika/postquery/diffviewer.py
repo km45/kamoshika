@@ -7,7 +7,9 @@ import typing
 import kamoshika.postquery.stream
 
 
-def invoke_diff_viewer(paths: typing.List[str], logger: logging.Logger) -> None:
+def invoke_diff_viewer(
+        paths: typing.List[str],
+        logger: logging.Logger) -> None:
     """Invoke diff viewer
 
     Args:
