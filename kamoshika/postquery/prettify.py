@@ -1,8 +1,27 @@
 # -*- coding: utf-8 -*-
+import json
 import logging
 import xml.dom.minidom
 
 import kamoshika.postquery.stream
+
+
+def format_json(input_string: str, logger: logging.Logger) -> str:
+    """Format json
+
+    Args:
+        input_string: json to format
+        logger: logger instance
+
+    Returns:
+        formatted json
+    """
+    logger.debug('before:\n{}'.format(input_string))
+
+    output = json.dumps(json.loads(input_string), ensure_ascii=False, indent=2)
+    logger.debug('after:\n{}'.format(output))
+
+    return output
 
 
 def format_xml(input_string: str, logger: logging.Logger) -> str:
@@ -35,6 +54,10 @@ def execute(_: str,
     if mode == 'xml':
         for single_host in stream:
             result = format_xml(single_host[path].decode(), logger)
+            single_host[path] = result.encode()
+    elif mode == 'json':
+        for single_host in stream:
+            result = format_json(single_host[path].decode(), logger)
             single_host[path] = result.encode()
     else:
         logger.warning('Invalid format is specified: {}'.format(format))
