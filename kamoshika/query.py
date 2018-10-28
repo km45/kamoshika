@@ -48,40 +48,28 @@ def fetch_responce(
 class XmlStrategy:
     """Strategy for xml"""
 
-    def __init__(
-            self,
-            server_config: typing.List[str],
-            request: dict,
-            logger: logging.Logger) -> None:
-        """
-        Args:
-            server_config: server field of config
-            request: request to post
-            logger: logger instance
-        """
-        self._server_config = server_config
-        self._request = request
-        self._logger = logger
-        self._responces = []  # type: typing.List[requests.Response]
-        self._post_query_stream: PostQueryStream = []
-
-    def query(self) -> PostQueryStream:
+    def query(self,
+              server_config: typing.List[str],
+              request: dict,
+              logger: logging.Logger) -> PostQueryStream:
         """Send a request and receive a responce for each server"""
-        for index, server in enumerate(self._server_config):
+        responces = []  # type: typing.List[requests.Response]
+        for index, server in enumerate(server_config):
             number = index + 1
-            self._logger.info(
-                'start query {}/{}'.format(number, len(self._server_config)))
-            self._responces.append(fetch_responce(
+            logger.info(
+                'start query {}/{}'.format(number, len(server_config)))
+            responces.append(fetch_responce(
                 server,
-                self._request['parameter'],
-                self._request.get('header'),
-                self._logger))
-            self._logger.info(
-                'end query {}/{}'.format(number, len(self._server_config)))
+                request['parameter'],
+                request.get('header'),
+                logger))
+            logger.info(
+                'end query {}/{}'.format(number, len(server_config)))
 
-        for responce in self._responces:
-            self._post_query_stream.append({'responce.xml': responce.content})
-        return self._post_query_stream
+        post_query_stream: PostQueryStream = []
+        for responce in responces:
+            post_query_stream.append({'responce.xml': responce.content})
+        return post_query_stream
 
 
 def query(
@@ -94,6 +82,5 @@ def query(
         request: request to post
         logger: logger instance
     """
-    strategy_instance = XmlStrategy(
-        server_config, request, logger)
-    return strategy_instance.query()
+    strategy_instance = XmlStrategy()
+    return strategy_instance.query(server_config, request, logger)
