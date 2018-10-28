@@ -9,7 +9,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
     """
 
     def do_GET(self):
-        time.sleep(5)
+        # time.sleep(5)
         super().do_GET()
         print(self.headers)
 
