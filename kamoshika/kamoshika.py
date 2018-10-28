@@ -57,7 +57,7 @@ def main():
     kamoshika.utility.clear_output_directory(parameters['--out'], logger)
 
     pqstream: PostQueryStream = kamoshika.query.query(
-        conf.get_server_list(), request, logger)
+        conf.get_query_config(), conf.get_server_list(), request, logger)
 
     for filter_conf in conf.get_post_query_filters():
         executor = getattr(importlib.import_module(
