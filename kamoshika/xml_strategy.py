@@ -50,18 +50,15 @@ class XmlStrategy:
 
     def __init__(
             self,
-            output_directory: str,
             server_config: typing.List[str],
             request: dict,
             logger: logging.Logger) -> None:
         """
         Args:
-            output_directory: directory where save files
             server_config: server field of config
             request: request to post
             logger: logger instance
         """
-        self._output_directory = output_directory
         self._server_config = server_config
         self._request = request
         self._logger = logger

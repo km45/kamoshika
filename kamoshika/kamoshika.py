@@ -56,7 +56,7 @@ def main():
 
     # TODO: Support other strategies
     strategy_instance = kamoshika.xml_strategy.XmlStrategy(
-        parameters['--out'], conf.get_server_list(), request, logger)
+        conf.get_server_list(), request, logger)
 
     kamoshika.utility.clear_output_directory(parameters['--out'], logger)
 
