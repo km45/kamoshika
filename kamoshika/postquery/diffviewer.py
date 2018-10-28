@@ -7,16 +7,30 @@ import typing
 import kamoshika.postquery.stream
 
 
-def invoke_diff_viewer(
+def invoke_meld(
         paths: typing.List[str],
         logger: logging.Logger) -> None:
-    """Invoke diff viewer
+    """Invoke meld as diff viewer
 
     Args:
         paths: files or directories
         logger: logger instance
     """
     command = ['meld'] + paths
+    logger.debug('execute following command:\n{}'.format(command))
+    subprocess.run(command)
+
+
+def invoke_vscode(
+        paths: typing.List[str],
+        logger: logging.Logger) -> None:
+    """Invoke vscode as diff viewer
+
+    Args:
+        paths: files or directories
+        logger: logger instance
+    """
+    command = ['code', '--diff'] + paths
     logger.debug('execute following command:\n{}'.format(command))
     subprocess.run(command)
 
@@ -36,4 +50,7 @@ def execute(output_directory: str,
         ) for index in range(len(stream))
     ]
 
-    invoke_diff_viewer(targets, logger)
+    if config['viewer'] == 'vscode':
+        invoke_vscode(targets, logger)
+    else:
+        invoke_meld(targets, logger)
