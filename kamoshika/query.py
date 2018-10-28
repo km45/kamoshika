@@ -46,6 +46,7 @@ def fetch_responce(
 
 
 def query(
+        query_config: typing.List[str],
         server_config: typing.List[str],
         request: dict,
         logger: logging.Logger) -> PostQueryStream:
@@ -53,6 +54,7 @@ def query(
     Send a request and receive a responce for each server
 
     Args:
+        query_config: query config filed of config
         server_config: server field of config
         request: request to post
         logger: logger instance
@@ -71,6 +73,7 @@ def query(
             'end query {}/{}'.format(number, len(server_config)))
 
     post_query_stream: PostQueryStream = []
+    path = query_config['dst']
     for responce in responces:
-        post_query_stream.append({'responce.xml': responce.content})
+        post_query_stream.append({path: responce.content})
     return post_query_stream
