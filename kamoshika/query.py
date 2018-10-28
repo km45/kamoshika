@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Provide functions for pre_query, query and post_query"""
+"""Send requests and receive responces"""
 
 import logging
 import typing
