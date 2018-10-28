@@ -46,7 +46,7 @@ def fetch_responce(
 
 
 def query(
-        query_config: typing.List[str],
+        query_config: dict,
         server_config: typing.List[str],
         request: dict,
         logger: logging.Logger) -> PostQueryStream:
