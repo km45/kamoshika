@@ -17,6 +17,9 @@ request:
     header:
       x-test-case-id: test3
       x-test-case-debug-id: long-param-test
+query:
+  config:
+    dst: responce.xml
 post-query-filters:
   - filter: kamoshika.postquery.dump
     config:

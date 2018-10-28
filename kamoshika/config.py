@@ -64,3 +64,11 @@ class Config:
             post query filter settings
         """
         return self._content['post-query-filters']
+
+    def get_query_config(self) -> dict:
+        """Return query config
+
+        Returns:
+            query config settings
+        """
+        return self._content['query']['config']
