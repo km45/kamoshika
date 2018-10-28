@@ -82,3 +82,18 @@ class XmlStrategy:
         for responce in self._responces:
             self._post_query_stream.append({'responce.xml': responce.content})
         return self._post_query_stream
+
+
+def query(
+        server_config: typing.List[str],
+        request: dict,
+        logger: logging.Logger):
+    """
+    Args:
+        server_config: server field of config
+        request: request to post
+        logger: logger instance
+    """
+    strategy_instance = XmlStrategy(
+        server_config, request, logger)
+    return strategy_instance.query()
