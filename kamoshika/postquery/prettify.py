@@ -18,7 +18,7 @@ def format_json(input_string: str, logger: logging.Logger) -> str:
     """
     logger.debug('before:\n{}'.format(input_string))
 
-    output = json.dumps(json.loads(input_string), ensure_ascii=False, indent=2)
+    output = json.dumps(json.loads(input_string), ensure_ascii=False, indent=4)
     logger.debug('after:\n{}'.format(output))
 
     return output
