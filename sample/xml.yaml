@@ -41,4 +41,4 @@ post-query-filters:
     config:
       dumped-dir: done
       target-path: responce.xml
-      viewer: vscode
+      viewer: meld
