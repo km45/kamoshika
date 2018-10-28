@@ -1,7 +1,7 @@
 import logging
 import os.path
 
-from kamoshika.postquery.prettify import format_json
+from kamoshika.postquery.prettify import format_json, format_xml
 
 
 def null_logger() -> logging.Logger:
@@ -27,5 +27,9 @@ def test_format_json():
 
 
 def test_format_xml():
-    # TODO: implement
-    pass
+    input_path = os.path.join(test_data_path(), 'input.xml')
+    output_path = os.path.join(test_data_path(), 'output.xml')
+    with open(input_path) as input, open(output_path) as output:
+        actual = format_xml(input.read(), null_logger())
+        expected = output.read()
+        assert actual == expected
