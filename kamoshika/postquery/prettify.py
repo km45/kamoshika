@@ -36,7 +36,12 @@ def format_xml(input_string: str, logger: logging.Logger) -> str:
     """
     logger.debug('before:\n{}'.format(input_string))
 
-    output = xml.dom.minidom.parseString(input_string).toprettyxml()
+    # https://stackoverflow.com/questions/14479656/empty-lines-while-using-minidom-toprettyxml
+    parsed = xml.dom.minidom.parseString(input_string)
+    result_with_empty_lines = parsed.toprettyxml(indent=' '*4)
+    output = '\n'.join(
+        [line for line in result_with_empty_lines.split('\n') if line.strip()])
+
     logger.debug('after:\n{}'.format(output))
 
     return output
