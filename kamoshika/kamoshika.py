@@ -27,9 +27,9 @@ import docopt
 from kamoshika.postquery.stream import PostQueryStream
 import kamoshika.config
 import kamoshika.log
+import kamoshika.query
 import kamoshika.utility
 import kamoshika.version
-import kamoshika.xml_strategy
 
 
 def parse_options() -> dict:
@@ -56,7 +56,7 @@ def main():
 
     kamoshika.utility.clear_output_directory(parameters['--out'], logger)
 
-    pqstream: PostQueryStream = kamoshika.xml_strategy.query(
+    pqstream: PostQueryStream = kamoshika.query.query(
         conf.get_server_list(), request, logger)
 
     for filter_conf in conf.get_post_query_filters():
