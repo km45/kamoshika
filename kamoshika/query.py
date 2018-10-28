@@ -45,42 +45,32 @@ def fetch_responce(
         return responce
 
 
-class XmlStrategy:
-    """Strategy for xml"""
-
-    def query(self,
-              server_config: typing.List[str],
-              request: dict,
-              logger: logging.Logger) -> PostQueryStream:
-        """Send a request and receive a responce for each server"""
-        responces = []  # type: typing.List[requests.Response]
-        for index, server in enumerate(server_config):
-            number = index + 1
-            logger.info(
-                'start query {}/{}'.format(number, len(server_config)))
-            responces.append(fetch_responce(
-                server,
-                request['parameter'],
-                request.get('header'),
-                logger))
-            logger.info(
-                'end query {}/{}'.format(number, len(server_config)))
-
-        post_query_stream: PostQueryStream = []
-        for responce in responces:
-            post_query_stream.append({'responce.xml': responce.content})
-        return post_query_stream
-
-
 def query(
         server_config: typing.List[str],
         request: dict,
-        logger: logging.Logger):
+        logger: logging.Logger) -> PostQueryStream:
     """
+    Send a request and receive a responce for each server
+
     Args:
         server_config: server field of config
         request: request to post
         logger: logger instance
     """
-    strategy_instance = XmlStrategy()
-    return strategy_instance.query(server_config, request, logger)
+    responces = []  # type: typing.List[requests.Response]
+    for index, server in enumerate(server_config):
+        number = index + 1
+        logger.info(
+            'start query {}/{}'.format(number, len(server_config)))
+        responces.append(fetch_responce(
+            server,
+            request['parameter'],
+            request.get('header'),
+            logger))
+        logger.info(
+            'end query {}/{}'.format(number, len(server_config)))
+
+    post_query_stream: PostQueryStream = []
+    for responce in responces:
+        post_query_stream.append({'responce.xml': responce.content})
+    return post_query_stream
