@@ -1,8 +1,8 @@
 ---
 
 server:
-  - 'http://localhost:8000/misc/1.xml'
-  - 'http://localhost:8000/misc/2.xml'
+  - 'http://localhost:8000/sample/1.xml'
+  - 'http://localhost:8000/sample/2.xml'
 request:
   - case-id: test1
     header:
@@ -41,4 +41,4 @@ post-query-filters:
     config:
       dumped-dir: done
       target-path: responce.xml
-      viewer: vscode
+      viewer: meld

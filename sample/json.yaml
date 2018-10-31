@@ -1,0 +1,34 @@
+---
+
+server:
+  - 'http://localhost:8000/sample/1.json'
+  - 'http://localhost:8000/sample/2.json'
+request:
+  - case-id: test1
+    parameter: ping=1
+  - case-id: test2
+    parameter: status=1
+query:
+  config:
+    dst: responce.json
+post-query-filters:
+  - filter: kamoshika.postquery.dump
+    config:
+      dst: raw
+  - filter: kamoshika.postquery.encoding
+    config:
+      guess-from: true
+      target-path: responce.json
+      to: UTF-8
+  - filter: kamoshika.postquery.prettify
+    config:
+      format: json
+      target-path: responce.json
+  - filter: kamoshika.postquery.dump
+    config:
+      dst: done
+  - filter: kamoshika.postquery.diffviewer
+    config:
+      dumped-dir: done
+      target-path: responce.json
+      viewer: vscode
