@@ -17,7 +17,7 @@ pytest = "*"
 rope = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
 
 [scripts]
 exec = "python -m kamoshika.kamoshika"
