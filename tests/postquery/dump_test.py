@@ -14,13 +14,13 @@ def null_logger() -> logging.Logger:
     return logger
 
 
-def report(expected_dir: str, actual_dir: str)->str:
+def report(expected_dir: str, actual_dir: str) -> str:
     comparer = filecmp.dircmp(expected_dir, actual_dir)
     comparer.report_full_closure()
     return 'Something different. Report details to stdout.'
 
 
-def compare(expected_dir: str, actual_dir: str)->bool:
+def compare(expected_dir: str, actual_dir: str) -> bool:
     comparer = filecmp.dircmp(expected_dir, actual_dir)
 
     if comparer.left_only != []:
